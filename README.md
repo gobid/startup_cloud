@@ -1,4 +1,4 @@
 startup_cloud
 =============
 
-global investments
+changing the way people start companies
