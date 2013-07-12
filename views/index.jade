@@ -1,13 +1,190 @@
 !!! 5
 html(lang='en')
 head
-	include head
+	meta(charset='utf-8')
+	title Carousel Template · Bootstrap
+	meta(name='viewport', content='width=device-width, initial-scale=1.0')
+	meta(name='description', content='')
+	meta(name='author', content='') 
+	link(href='docs/assets/css/bootstrap.css', rel='stylesheet')
+	link(href='docs/assets/css/bootstrap-responsive.css', rel='stylesheet')
+	link(href='docs/assets/css/carousel-styles.css', rel='stylesheet')
+	//if lt IE 9
+		script(src='docs/assets/js/html5shiv.js')
+	link(rel='apple-touch-icon-precomposed', sizes='144x144', href='docs/assets/ico/apple-touch-icon-144-precomposed.png')
+	link(rel='apple-touch-icon-precomposed', sizes='114x114', href='docs/assets/ico/apple-touch-icon-114-precomposed.png')
+	link(rel='apple-touch-icon-precomposed', sizes='72x72', href='docs/assets/ico/apple-touch-icon-72-precomposed.png')
+	link(rel='apple-touch-icon-precomposed', href='docs/assets/ico/apple-touch-icon-57-precomposed.png')
+	link(rel='shortcut icon', href='docs/assets/ico/favicon.png')
 body
-	include navbar
-	.container-fluid
-		.row-fluid
-			.span12
-		hr
+	.navbar-wrapper
+		.container
+			.navbar.navbar-inverse
+				.navbar-inner
+					button.btn.btn-navbar(type='button', data-toggle='collapse', data-target='.nav-collapse')
+						span.icon-bar
+						span.icon-bar
+						span.icon-bar
+					a.brand(href='#') Startup Cloud
+					.nav-collapse.collapse
+						ul.nav
+							li.active
+								a(href='#') Home
+							li
+								a(href='#about') About
+							li
+								a(href='#contact') Contact
+							li.dropdown
+								a.dropdown-toggle(href='#', data-toggle='dropdown')
+									| Dropdown
+									b.caret
+								ul.dropdown-menu
+									li
+										a(href='#') Action
+									li
+										a(href='#') Another action
+									li
+										a(href='#') Something else here
+									li.divider
+									li.nav-header Nav header
+									li
+										a(href='#') Separated link
+									li
+										a(href='#') One more separated link
+	#myCarousel.carousel.slide
+		.carousel-inner
+			.item.active
+				img(src='docs/assets/img/examples/slide-01.jpg', alt='')
+				.container
+					.carousel-caption
+						h1 Example headline.
+						p.lead
+							| Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.	
+						script
+							window.fbAsyncInit = function() {
+								FB.init({
+									appId      : '472403996180656', // App ID
+									channelUrl : '//WWW.STARTUPCLOUD.ORG/channel.html', // Channel File
+									status     : true, // check login status
+									cookie     : true, // enable cookies to allow the server to access the session
+									xfbml      : true  // parse XFBML
+								});
+								FB.Event.subscribe('auth.authResponseChange', function(response) {
+									if (response.status === 'connected') testAPI();
+									else if (response.status === 'not_authorized') FB.login();
+									else FB.login();
+								});
+							};
+							(function(d){
+									var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+									if (d.getElementById(id)) {return;}
+									js = d.createElement('script'); js.id = id; js.async = true;
+									js.src = "//connect.facebook.net/en_US/all.js";
+									ref.parentNode.insertBefore(js, ref);
+								}(document));
+								function testAPI() {
+									console.log('Welcome!  Fetching your information.... ');
+									FB.api('/me', function(response) {
+									console.log('Good to see you, ' + response.name + '.');
+								});
+							}
+						.fb-root
+						br
+						fb:login-button(show-faces='true', width='200', max-rows='1')
+			.item
+				img(src='docs/assets/img/examples/slide-02.jpg', alt='')
+				.container
+					.carousel-caption
+						h1 Another example headline.
+						p.lead
+							| Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
+						br
+						fb:login-button(show-faces='true', width='200', max-rows='1')
+			.item
+				img(src='docs/assets/img/examples/slide-03.jpg', alt='')
+				.container
+					.carousel-caption
+						h1 One more for good measure.
+						p.lead
+							| Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
+						br
+						fb:login-button(show-faces='true', width='200', max-rows='1')
+		a.left.carousel-control(href='#myCarousel', data-slide='prev') ‹
+		a.right.carousel-control(href='#myCarousel', data-slide='next') ›
+	.container.marketing
+		.row
+			.span4
+				img.img-circle(data-src='holder.js/140x140')
+				h2 Heading
+				p
+					| Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna, vel scelerisque nisl consectetur et.
+				p
+					a.btn(href='#') View details »
+			.span4
+				img.img-circle(data-src='holder.js/140x140')
+				h2 Heading
+				p
+					| Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.
+				p
+					a.btn(href='#') View details »
+			.span4
+				img.img-circle(data-src='holder.js/140x140')
+				h2 Heading
+				p
+					| Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.
+				p
+					a.btn(href='#') View details »
+		hr.featurette-divider
+		.featurette
+			img.featurette-image.pull-right(src='docs/assets/img/examples/browser-icon-chrome.png')
+			h2.featurette-heading
+				| First featurette headling. 
+				span.muted It'll blow your mind.
+			p.lead
+				| Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.
+			hr.featurette-divider
+		.featurette
+			img.featurette-image.pull-left(src='docs/assets/img/examples/browser-icon-firefox.png')
+			h2.featurette-heading
+				| Oh yeah, it's that good. 
+				span.muted See for yourself.
+			p.lead
+				| Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.
+			hr.featurette-divider
+		.featurette
+			img.featurette-image.pull-right(src='docs/assets/img/examples/browser-icon-safari.png')
+			h2.featurette-heading
+				| And lastly, this one. 
+				span.muted Checkmate.
+			p.lead
+				| Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.
+			hr.featurette-divider
 		footer
-			p © Startup Cloud&nbsp&nbsp2013
-	include script-load
+			p.pull-right
+				a(href='#') Back to top
+			p
+				| © 2013 Company, Inc. · 
+				a(href='#') Privacy 
+				| · 
+				a(href='#') Terms
+	script(src='docs/assets/js/jquery.js')
+	script(src='docs/assets/js/bootstrap-transition.js')
+	script(src='docs/assets/js/bootstrap-alert.js')
+	script(src='docs/assets/js/bootstrap-modal.js')
+	script(src='docs/assets/js/bootstrap-dropdown.js')
+	script(src='docs/assets/js/bootstrap-scrollspy.js')
+	script(src='docs/assets/js/bootstrap-tab.js')
+	script(src='docs/assets/js/bootstrap-tooltip.js')
+	script(src='docs/assets/js/bootstrap-popover.js')
+	script(src='docs/assets/js/bootstrap-button.js')
+	script(src='docs/assets/js/bootstrap-collapse.js')
+	script(src='docs/assets/js/bootstrap-carousel.js')
+	script(src='docs/assets/js/bootstrap-typeahead.js')
+	script
+		!function ($) {
+			$(function(){
+				// carousel demo
+				$('#myCarousel').carousel()
+			})
+		}(window.jQuery)
+	script(src='docs/assets/js/holder/holder.js')
