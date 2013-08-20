@@ -75,3 +75,8 @@ chmod u+x git-credential-osxkeychain
 sudo mv git-credential-osxkeychain   "$(dirname $(which git))/git-credential-osxkeychain"
 git config --global credential.helper osxkeychain
 git pull origin master
+ls
+git commit -a -m "amazon cloud side setup"
+git add .
+git commit -a -m "amazon cloud side setup"
+git pull origin master
