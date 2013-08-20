@@ -1,0 +1,9 @@
+[user]
+	name = govindad
+<<<<<<< HEAD
+	email = govinda@govindadasu.com
+=======
+	email = govinda@govindadasu.com
+[credential]
+	helper = osxkeychain
+>>>>>>> 4d70d68940f70fdeb66ef0ae185edb748560e2dc
