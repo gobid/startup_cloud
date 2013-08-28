@@ -1,0 +1,34 @@
+!!! 5
+html(lang='en')
+head
+	include ../head
+body 
+	include ../navbar
+	.container
+		.row
+			.col-xs-2
+				include side-navbar
+			.col-xs-7
+				.product_list
+					if (company) 
+						- var x;
+						- for (x = 0; x < company.products.length; x++)
+							.row
+								.col-xs-3
+									img.img-rounded(src='data:image/png;base64,', data-src='holder.js/125x100', alt='Generic placeholder image', field = 'product_image', number = '0')
+								.col-xs-9
+									input.form-control.input-lg(value='#{company.products[x].name}', field = 'product_name', number = '#{x}')
+									br
+									input.form-control(value = '#{company.products[x].subtitle}', field = 'product_subtitle', number = '#{x}')
+							br
+							.row
+								.col-xs-12
+									textarea.form-control(rows = '3', value = '#{company.products[x].description}', field = 'product_description', number = '#{x}')
+									br
+									.input-group
+										span.input-group-addon http://youtube.com/
+										input.form-control(type='text', value = '#{company.products[x].video}', field = 'product_video', number = '#{x}')
+							br
+				button.btn.btn-default.btn-lg.btn-block(type='button', id = 'create_new_product', index = '#{x}') New Product
+			.col-xs-3
+	include ../footer

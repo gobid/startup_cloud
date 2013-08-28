@@ -1,0 +1,33 @@
+.navbar.navbar-default.navbar-fixed-top
+	.container
+		.navbar-header
+			button.navbar-toggle(type='button', data-toggle='collapse', data-target='.navbar-collapse')
+				span.icon-bar
+				span.icon-bar
+				span.icon-bar
+			a.navbar-brand(href='#') Startup Cloud
+		.navbar-collapse.collapse
+			ul.nav.navbar-nav
+				li.dropdown.active
+					a.dropdown-toggle(href='#', data-toggle='dropdown')
+						| Entrepreneur's Desk
+						b.caret
+					ul.dropdown-menu
+						if (user)
+							each company in user.companies_started
+								li
+									a(href='/entrepreneur/company/#{company.id}') #{company.name} 
+						li
+							a(href='/entrepreneur/company') Create a new company
+				li
+					a(href='/investor/my_equity') Investor's Desk
+				li
+					a(href='/equity_partner/my_companies') Equity Partner's Desk
+				li
+					a(href='/profile') Profile
+				li
+					a(href='#') Notifications
+				li 
+					a(href='#') Logout
+if (company)
+	input(style = 'display:none;', id = 'company_id', value = '#{company.id}')

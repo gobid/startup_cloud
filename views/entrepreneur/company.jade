@@ -1,0 +1,186 @@
+!!! 5
+html(lang='en')
+head
+	include ../head
+body 
+	include ../navbar
+	.container
+		.row
+			.col-xs-2
+				include side-navbar
+			.col-xs-7
+				.row
+					.col-xs-3
+						img.img-rounded(src='data:image/png;base64,', data-src='holder.js/125x100', alt='Generic placeholder image', id = 'company_image')
+					.col-xs-9
+						if (company)
+							input.form-control.input-lg(id = 'company_name', value = '#{company.name}')
+						else
+							input.form-control.input-lg(placeholder='Company name', id = 'company_name', data-placement='bottom', data-container = 'body', data-content="Welcome to Startup Cloud, where you can start, invest in, and join startups. Fill in your company's name to get started. This is a required field.", data-trigger = 'manual')
+						br
+						if (company && company.slogan != '')
+							input.form-control(id = 'slogan', value = '#{company.slogan}')
+						else 
+							input.form-control(placeholder='Company slogan', id = 'slogan', data-placement='right', data-container = 'body', data-content="Place your company's witty slogan right here. Leave blank if you don't have one.", data-trigger = 'manual')	
+				br
+				.row
+					.col-xs-12
+						if (company && company.description != '')
+							textarea.form-control(rows = '3', id = 'description', value = '#{company.description}')
+						else
+							textarea.form-control(rows = '3', placeholder = 'Description', id = 'description', data-placement='right', data-container = 'body', data-content="A concise description of the services, goals, and objectives of your company.", data-trigger = 'manual')
+				br
+				.row
+					.col-xs-6
+						.input-group
+							span.input-group-addon http://
+							if (company && company.website != '')
+								input.form-control(type='text', id = 'website', value = '#{company.website}')
+							else
+								input.form-control(type='text', placeholder='website', id = 'website', data-placement='right', data-container = 'body', data-content="Link to the front page of your company's website. Leave blank if you don't have one.", data-trigger = 'manual')
+						.input-group
+							span.input-group-addon https://facebook.com/
+							if (company && company.fb_page != '')
+								input.form-control(type='text', id = 'facebook', value = '#{company.fb_page}')
+							else
+								input.form-control(type='text', placeholder='facebook', id = 'facebook', data-placement='right', data-container = 'body', data-content="Link to your facebook page's vanity URL. Leave blank if you don't have one.", data-trigger = 'manual')
+						.input-group
+							span.input-group-addon @
+							if (company && company.twitter != '')
+								input.form-control(type='text', id = 'twitter', value = '#{company.twitter}')
+							else
+								input.form-control(type='text', placeholder='twitter', id = 'twitter', data-placement='right', data-container = 'body', data-content="Link to your company's twitter account. Leave blank if you don't have one.", data-trigger = 'manual')
+						.input-group
+							span.input-group-addon http://
+							if (company && company.blog != '')
+								input.form-control(type='text', id = 'blog', value = '#{company.blog}')
+							else
+								input.form-control(type='text', placeholder='blog', id = 'blog', data-placement='right', data-container = 'body', data-content="Link to your company's twitter account. Leave blank if you don't have one.", data-trigger = 'manual')
+						select.form-control(id = 'industry', data-placement='right', data-container = 'body', data-content="Select the industry your company falls under. If your company falls under multiple, choose one. Leave blank if you don't have one.", data-trigger = 'manual')
+							// taken from harvard business school - http://hbswk.hbs.edu/industries/
+							option Select Industry
+							option Agriculture
+							option Accounting
+							option Advertising
+							option Aerospace
+							option Aircraft
+							option Airline
+							option Apparel & Accessories
+							option Automotive
+							option Banking
+							option Broadcasting
+							option Broadcasting
+							option Biotechnology
+							option Call Centers 
+							option Cargo Handling
+							option Chemical 
+							option Computer
+							option Consulting
+							option Consumer Products
+							option Cosmetics
+							option Defense
+							option Department Stores
+							option Education
+							option Electronics
+							option Energy
+							option Entertainment & Leisure
+							option Executive Search
+							option Financial Services
+							option Food, Beverage, & Tobacco
+							option Grocery
+							option Health Care
+							option Internet Publishing
+							option Investment Banking
+							option Legal
+							option Manufacturing
+							option Motion Picture & Video
+							option Music
+							option Newspaper Publishers
+							option Online Auctions
+							option Pension Funds
+							option Pharmaceuticals
+							option Private Equity
+							option Publishing
+							option Real Estate
+							option Retail & Wholesale
+							option Securities & Commodity Exchanges
+							option Service
+							option Soap & Detergent 
+							option Software
+							option Sports
+							option Technology
+							option Telecommunications
+							option Television
+							option Transportation
+							option Venture Capital
+					.col-xs-6
+						.input-group
+							span.input-group-addon.glyphicon.glyphicon-earphone
+							if (company && company.phone != '')
+								input.form-control(type='tel', id = 'phone', value = '#{company.phone}')
+							else
+								input.form-control(type='tel', placeholder='phone', id = 'phone', data-placement='right', data-container = 'body', data-content="Enter your company's contact phone number. Leave blank if you don't have one.", data-trigger = 'manual')
+						.input-group
+							span.input-group-addon.glyphicon.glyphicon-envelope
+							if (company && company.email != '')
+								input.form-control(type='email', id = 'email', value = '#{company.email}')
+							else
+								input.form-control(type='email', placeholder='email', id = 'email', data-placement='right', data-container = 'body', data-content="Enter your company's contact email. This is a required field.", data-trigger = 'manual')
+						.input-group
+							span.input-group-addon Founded
+							if (company && company.founded != '')
+								input.form-control(type='text', id = 'founded', value = '#{company.founded}')
+							else
+								input.form-control(type='text', placeholder='year', id = 'founded', data-placement='right', data-container = 'body', data-content="Enter the year your company was founded. This is a required field.", data-trigger = 'manual')
+						.input-group
+							span.input-group-addon Address
+							if (company && company.address != '')
+								input.form-control(type='text', id = 'address', value = '#{company.address}')
+							else
+								input.form-control(type='text', placeholder='address', id = 'address', data-placement='right', data-container = 'body', data-content="Enter your company's address. Leave blank if you don't have one.", data-trigger = 'manual')
+						.input-group
+							span.input-group-addon City
+							if (company && company.city != '')
+								input.form-control(type='text', id = 'city', value = '#{company.city}')
+							else
+								input.form-control(type='text', placeholder='city', id = 'city', data-placement='right', data-container = 'body', data-content="Enter your company's city. Leave blank if you don't have one.", data-trigger = 'manual')
+						.input-group
+							span.input-group-addon State
+							if (company && company.state != '')
+								input.form-control(type='text', id = 'state', value = '#{company.state}')
+							else
+								input.form-control(type='text', placeholder='state', id = 'state', data-placement='right', data-container = 'body', data-content="Enter your company's state. Leave blank if you don't have one.", data-trigger = 'manual')
+						.input-group
+							span.input-group-addon Country
+							if (company && company.country != '')
+								input.form-control(type='text', id = 'country', value = '#{company.country}')
+							else
+								input.form-control(type='text', placeholder='country', id = 'country', data-placement='right', data-container = 'body', data-content="Enter your company's address. This is a required field.", data-trigger = 'manual')
+						.input-group
+							span.input-group-addon Zip
+							if (company && company.zip != '')
+								input.form-control(type='text', id = 'zip', value = '#{company.zip}')
+							else
+								input.form-control(type='text', placeholder='zip', id = 'zip', data-placement='right', data-container = 'body', data-content="Enter your company's zip code. Leave blank if you don't have one.", data-trigger = 'manual')
+				br
+				.row
+					.col-xs-12
+						.input-group
+							span.input-group-addon http://youtube.com/
+							if (company && company.video != '')
+								input.form-control(type='text', id = 'company_video', value = '#{company.video}')
+							else	
+								input.form-control(type='text', placeholder='company video', id = 'company_video', data-placement='right', data-container = 'body', data-content="Enter a link to a youtube video that presents your company. Leave blank if you don't have one.", data-trigger = 'manual')
+				br
+				.row
+					.col-xs-12
+						if (!company)
+							button.btn.btn-default.pull-right(type='button', id = 'create_company') Create Company
+				br
+				.row
+					.col-xs-12-f
+						.alert.alert-block.alert-danger(style = "display:none;", id = 'missingfields')
+							h4 Please fill in all required fields.
+							p Company name, description, industry, email, founded, and country. 
+			.col-xs-3
+	include ../footer

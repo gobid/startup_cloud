@@ -1,0 +1,47 @@
+.well.sidebar-nav
+	ul.nav
+		li.active
+			if (company)
+				a(href='/entrepreneur/company/#{company.id}') Company
+			else 
+				a(href='#') Company
+		li
+			if (company)
+				a(href='/entrepreneur/product/#{company.id}') Product
+			else
+				a(href='#') Product
+		li
+			if (company)
+				a(href='/entrepreneur/team/#{company.id}') Team
+			else
+				a(href='#') Team
+		li
+			if (company)
+				a(href='/entrepreneur/investors/#{company.id}') Investors
+			else
+				a(href='#') Investors
+		li
+			if (company)
+				a(href='/entrepreneur/finances/#{company.id}') Finances
+			else
+				a(href='#') Finances
+		li
+			if (company)
+				a(href='/entrepreneur/social_outreach/#{company.id}') Outreach
+			else
+				a(href='#') Outreach
+		li
+			if (company)
+				a(href='/entrepreneur/related_companies/#{company.id}') Competition
+			else
+				a(href='#') Competition
+		li
+			if (company)
+				a(href='/entrepreneur/equity_valuation/#{company.id}') Valuation
+			else
+				a(href='#') Valuation
+		li
+			if (company)
+				a(href='/entrepreneur/projected_growth/#{company.id}') Projections
+			else
+				a(href='#') Projections
