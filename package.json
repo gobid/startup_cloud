@@ -12,6 +12,7 @@
   "mongodb": "*",
   "mongoose": "*",
   "validator": "*",
-  "express-mailer": "*"
+  "express-mailer": "*",
+  "hogan.js": "*"
  }
 }

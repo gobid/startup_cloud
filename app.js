@@ -183,7 +183,15 @@
 	})
 	app.get('/investor/my_equity', function(req, res){
 		if (req.session.user == null) res.redirect('/')
-		else res.render('investor/my_equity', {title: "Investor's Desk: My Equity", user: req.session.user})
+		else {
+			User.findById(req.session.user._id, function(err, user) {
+				if (err) console.log('Error while finding user.')
+				if (user != null && user != undefined) 
+					res.render('investor/my_equity', {title: "Investor's Desk: My Equity", user: user})
+				else
+					return console.log('Problem finding user.')
+			})	
+		} 
 	})
 	app.get('/investor/research', function(req, res){
 		if (req.session.user == null) res.redirect('/')
@@ -191,7 +199,15 @@
 	})
 	app.get('/equity_partner/my_companies', function(req, res){
 		if (req.session.user == null) res.redirect('/')
-		else res.render('equity_partner/my_companies', {title: "Equity Partner's Desk: My Companies", user: req.session.user})
+		else { 
+			User.findById(req.session.user._id, function(err, user) {
+				if (err) console.log('Error while finding user.')
+				if (user != null && user != undefined) 
+					res.render('equity_partner/my_companies', {title: "Equity Partner's Desk: My Companies", user: user})
+				else
+					return console.log('Problem finding user.')
+			})			
+		}
 	})
 	app.get('/profile', function(req, res){
 		if (req.session.user == null) res.redirect('/')
@@ -201,7 +217,7 @@
 		req.session.at = null
 		req.session.user = null
 		res.redirect('/')
-		/* note logout button when implemented must use: FB.logout(function(response) { // Person is now logged out });
+		/* note logout button when implemented must use: FB.logout(function(response) { // Person is now logged out })
 		   remember to warn the user that By facebook policy they will also be logged out of facebook */
 	})
 
@@ -411,7 +427,7 @@
 					var company = result
 					var index = req.params['record_index']
 					if (index < company.products.length) company.products[index].name = req.params['record_value'].trim() // just update the name case
-					else company.products.push({name: req.params['product_name'], subtitle: '', description: '', video: ''}) // add a new product struct case
+					else company.products.push({name: req.params['record_value'].trim(), subtitle: '', description: '', video: ''}) // add a new product struct case
 					Company.update({_id: req.params['company_id']}, {products: company.products}, function(err){
 						if (err) console.log('Error while updating company record.')
 					}) // so in the end the products are listed in the order one types them in, not the order of the original form
@@ -423,7 +439,7 @@
 					var company = result
 					var index = req.params['record_index']
 					if (index < company.products.length) company.products[index].subtitle = req.params['record_value'].trim() // just update the name case
-					else company.products.push({name: '', subtitle: req.params['product_subtitle'], description: '', video: ''}) // add a new product struct case
+					else company.products.push({name: '', subtitle: req.params['record_value'].trim(), description: '', video: ''}) // add a new product struct case
 					Company.update({_id: req.params['company_id']}, {products: company.products}, function(err){
 						if (err) console.log('Error while updating company record.')
 					}) // so in the end the products are listed in the order one types them in, not the order of the original form
@@ -435,7 +451,7 @@
 					var company = result
 					var index = req.params['record_index']
 					if (index < company.products.length) company.products[index].description = req.params['record_value'].trim() // just update the name case
-					else company.products.push({name: '', subtitle: '', description: req.params['product_description'], video: ''}) // add a new product struct case
+					else company.products.push({name: '', subtitle: '', description: req.params['record_value'].trim(), video: ''}) // add a new product struct case
 					Company.update({_id: req.params['company_id']}, {products: company.products}, function(err){
 						if (err) console.log('Error while updating company record.')
 					}) // so in the end the products are listed in the order one types them in, not the order of the original form
@@ -447,7 +463,7 @@
 					var company = result
 					var index = req.params['record_index']
 					if (index < company.products.length) company.products[index].video = req.params['record_value'].trim() // just update the name case
-					else company.products.push({name: '', subtitle: '', description: '', video: req.params['product_video']}) // add a new product struct case
+					else company.products.push({name: '', subtitle: '', description: '', video: req.params['record_value'].trim()}) // add a new product struct case
 					Company.update({_id: req.params['company_id']}, {products: company.products}, function(err){
 						if (err) console.log('Error while updating company record.')
 					}) // so in the end the products are listed in the order one types them in, not the order of the original form
@@ -456,6 +472,134 @@
 			res.send('updating-db')
 		}
 		else res.redirect('/')
+	})
+	app.get('/find_user/:name.json', function(req, res){
+		if (req.session.user != null) {
+			var name = req.params['name'].split(" ")
+			var fname = name[0]
+			var lname = (name.length > 1) ? name[name.length - 1] : ''
+			User.find({fname: new RegExp(fname, 'i'), lname: new RegExp(lname, 'i')}, function(err, result){
+				console.log(result)
+				users = []
+				for (index in result){
+					users.push({value: result[index].fname + ' ' + result[index].lname, id: result[index]._id} )
+				}
+				res.json(users)
+			})
+		}
+		else res.send('not-logged-in')
+	})
+	app.get('/add_pending_member/:company_id/:member_id/:job/:equity', function(req, res){
+		var company_id = req.params['company_id']
+		var member_id = req.params['member_id']
+		var job = req.params['job']
+		var equity = req.params['equity']
+		Company.findById(company_id, function(err, result){
+			if (err) console.log('Could not find company to update')
+			var team = result.team
+			var member_seen = 0
+			for (index in team){
+				if (team[index].id == member_id) {
+					member_seen = 1
+					team[index].job = job
+					team[index].equity = equity
+				}
+			}
+			if (!member_seen) team.push({id: member_id, job: job, equity: equity, pending: 1})
+			Company.update({_id: company_id}, {team: team}, function(err){
+				if (err) console.log('Error while updating company record.')
+			})
+		})
+		User.findById(member_id, function(err, result){
+			if (err) console.log('Could not find user to update')
+			var equity_partnerships = result.equity_partnerships
+			var partnership_seen = 0
+			for (index in equity_partnerships){
+				if (equity_partnerships[index].id == company_id){
+					partnership_seen = 1
+					equity_partnerships[index].job = job
+					equity_partnerships[index].equity = equity
+				}
+			}
+			if (!partnership_seen) equity_partnerships.push({id: company_id, job: job, equity: equity, pending: 1})
+			User.update({_id: member_id}, {equity_partnerships: equity_partnerships}, function(err){
+				if (err) console.log('Error while updating user record.')
+			})
+		})
+		res.send('updating company and member in database')
+	})
+	app.get('/add_pending_investor/:company_id/:investor_id/:contribution/:equity', function(req, res){
+		var company_id = req.params['company_id']
+		var investor_id = req.params['investor_id']
+		var contribution = req.params['contribution']
+		var equity = req.params['equity']
+		Company.findById(company_id, function(err, result){
+			if (err) console.log('Could not find company to update')
+			var investors = result.investors
+			var investor_seen = 0
+			for (index in investors){
+				if (investors[index].id == investor_id) {
+					investor_seen = 1
+					investors[index].contribution = contribution
+					investors[index].equity = equity
+				}
+			}
+			if (!investor_seen) investors.push({id: investor_id, contribution: contribution, equity: equity, pending: 1})
+			Company.update({_id: company_id}, {investors: investors}, function(err){
+				if (err) console.log('Error while updating company record.')
+			})
+		})
+		User.findById(investor_id, function(err, result){
+			if (err) console.log('Could not find user to update')
+			var investments = result.investments
+			var investment_seen = 0
+			for (index in investments){
+				if (investments[index].id == company_id){
+					investment_seen = 1
+					investments[index].contribution = contribution
+					investments[index].equity = equity
+				}
+			}
+			if (!investment_seen) investments.push({id: company_id, contribution: contribution, equity: equity, pending: 1})
+			User.update({_id: investor_id}, {investments: investments}, function(err){
+				if (err) console.log('Error while updating user record.')
+			})
+		})
+		res.send('updating company and member in database')
+	})
+	app.get('/get_user_by_id/:id', function(req, res){
+		if (req.session.user != null) {
+			var id = req.params['id']
+			User.findById(id, function(err, result){
+				if (result != null && result != undefined) res.json({name: result.fname + ' ' + result.lname})
+				else res.json({name: 'no-name-found'})
+			})
+		}
+		else res.send('not-logged-in')
+	})
+	app.get('/find_company/:name.json', function(req, res){
+		if (req.session.user != null) {
+			var name = req.params['name']
+			Company.find({name: new RegExp(name, 'i')}, function(err, result){
+				console.log(result)
+				companies = []
+				for (index in result){
+					companies.push({value: result[index].name, id: result[index]._id} )
+				}
+				res.json(companies)
+			})
+		}
+		else res.send('not-logged-in')
+	})
+	app.get('/get_company_by_id/:id', function(req, res){
+		if (req.session.user != null) {
+			var id = req.params['id']
+			Company.findById(id, function(err, result){
+				if (result != null && result != undefined) res.json({name: result.name})
+				else res.json({name: 'no-name-found'})
+			})
+		}
+		else res.send('not-logged-in')
 	})
 
 /* (5) SERVER LISTENING */

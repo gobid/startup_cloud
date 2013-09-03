@@ -9,21 +9,26 @@ body
 			.col-xs-2
 				include side-navbar
 			.col-xs-7
-				.row
-					.col-xs-3
-						img.img-rounded(src='data:image/png;base64,', data-src='holder.js/125x100', alt='Generic placeholder image', id = 'image1')
-					.col-xs-9
-						input.form-control.input-lg(placeholder='Company 1', id = 'investment_name1')
-						br
-						.row
-							.col-xs-6
-								.input-group
-									span.input-group-addon $
-									input.form-control(type='text', placeholder="Contribution", id = 'amount1')
-							.col-xs-6
-								.input-group
-									input.form-control(type='text', placeholder="Equity", id = 'investment_equity1')
-									span.input-group-addon %
-				br 
-				button.btn.btn-default.btn-lg.btn-block(type='button') New Company
+				.investment_list
+					if (user)
+						- var x;
+						- for (x = 0; x < user.investments.length; x++)
+							.row
+								.col-xs-3
+									img.img-rounded(src='data:image/png;base64,', data-src='holder.js/125x100', alt='Generic placeholder image', number = '#{x}')
+								.col-xs-9
+									input.form-control.investment-typeahead(value='', field = 'investment_name', number = '#{x}', disabled = 'disabled', investment_id = '#{user.investments[x].id}')
+									br
+									br
+									.row
+										.col-xs-6
+											.input-group
+												span.input-group-addon $
+												input.form-control(type='text', value = '#{user.investments[x].contribution}', field = 'investment_contribution', number = '#{x}')
+										.col-xs-6
+											.input-group
+												input.form-control(type='text', value = '#{user.investments[x].equity}', field = 'investment_equity', number = '#{x}')
+												span.input-group-addon %
+							br 
+				button.btn.btn-default.btn-lg.btn-block(type='button', id = 'create_new_investment', index = '#{x}') New Company
 	include ../footer

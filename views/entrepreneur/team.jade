@@ -9,20 +9,25 @@ body
 			.col-xs-2
 				include side-navbar
 			.col-xs-7
-				.row
-					.col-xs-3
-						img.img-rounded(src='data:image/png;base64,', data-src='holder.js/125x100', alt='Generic placeholder image', id = 'image1')
-					.col-xs-9
-						input.form-control.input-lg(placeholder='Member 1', id = 'name1')
-						br
-						.row
-							.col-xs-6
-								input.form-control(type='text', placeholder="Job", id = 'job1')
-							.col-xs-6
-								.input-group
-									input.form-control(type='text', placeholder="Equity", id = 'equity1')
-									span.input-group-addon %
-				br 
-				button.btn.btn-default.btn-lg.btn-block(type='button') New Member
+				.team_list
+					if (company)
+						- var x;
+						- for (x = 0; x < company.team.length; x++)
+							.row
+								.col-xs-3
+									img.img-rounded(src='data:image/png;base64,', data-src='holder.js/125x100', alt='Generic placeholder image', number = '#{x}')
+								.col-xs-9
+									input.form-control.user-typeahead(value = '', field = 'member_name', number = '#{x}', disabled = 'disabled', member_id = '#{company.team[x].id}')
+									br
+									br
+									.row
+										.col-xs-6
+											input.form-control(type='text', value = '#{company.team[x].job}', field = 'member_job', number = '#{x}')
+										.col-xs-6
+											.input-group
+												input.form-control(type='text', value = '#{company.team[x].equity}', field = 'member_equity', number = '#{x}')
+												span.input-group-addon %
+							br 
+				button.btn.btn-default.btn-lg.btn-block(type='button', id = 'create_new_member', index = '#{x}') New Member
 			.col-xs-3
 	include ../footer

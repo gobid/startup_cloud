@@ -9,22 +9,27 @@ body
 			.col-xs-2
 				include side-navbar
 			.col-xs-7
-				.row
-					.col-xs-3
-						img.img-rounded(src='data:image/png;base64,', data-src='holder.js/125x100', alt='Generic placeholder image', id = 'image1')
-					.col-xs-9
-						input.form-control.input-lg(placeholder='Investor 1', id = 'name1')
-						br
-						.row
-							.col-xs-6
-								.input-group
-									span.input-group-addon $
-									input.form-control(type='text', placeholder="Contribution", id = 'amount1')
-							.col-xs-6
-								.input-group
-									input.form-control(type='text', placeholder="Equity", id = 'equity1')
-									span.input-group-addon %
-				br 
-				button.btn.btn-default.btn-lg.btn-block(type='button') New Investor
+				.investor_list
+					if (company)
+						- var x;
+						- for (x = 0; x < company.investors.length; x++)
+							.row
+								.col-xs-3
+									img.img-rounded(src='data:image/png;base64,', data-src='holder.js/125x100', alt='Generic placeholder image', number = '#{x}')
+								.col-xs-9
+									input.form-control.investor-typeahead(value='', field = 'investor_name', number = '#{x}', data-placement='right', data-container = 'body', data-content="Please select an investor from the autocomplete options.", data-trigger = 'manual', disabled = 'disabled', investor_id = '#{company.investors[x].id}')
+									br
+									br
+									.row
+										.col-xs-6
+											.input-group
+												span.input-group-addon $
+												input.form-control(type='text', value = '#{company.investors[x].contribution}', field = 'investor_contribution', number = '#{x}')
+										.col-xs-6
+											.input-group
+												input.form-control(type='text', value = '#{company.investors[x].equity}', field = 'investor_equity', number = '#{x}')
+												span.input-group-addon %
+							br 
+				button.btn.btn-default.btn-lg.btn-block(type='button', id = 'create_new_investor', index = '#{x}') New Investor
 			.col-xs-3
 	include ../footer

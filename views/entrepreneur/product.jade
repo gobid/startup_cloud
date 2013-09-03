@@ -15,7 +15,7 @@ body
 						- for (x = 0; x < company.products.length; x++)
 							.row
 								.col-xs-3
-									img.img-rounded(src='data:image/png;base64,', data-src='holder.js/125x100', alt='Generic placeholder image', field = 'product_image', number = '0')
+									img.img-rounded(src='data:image/png;base64,', data-src='holder.js/125x100', alt='Generic placeholder image', field = 'product_image', number = '#{x}')
 								.col-xs-9
 									input.form-control.input-lg(value='#{company.products[x].name}', field = 'product_name', number = '#{x}')
 									br

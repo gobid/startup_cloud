@@ -31,3 +31,5 @@
 					a(href='#') Logout
 if (company)
 	input(style = 'display:none;', id = 'company_id', value = '#{company.id}')
+if (user)
+	input(style = 'display:none;', id = 'member_id', value = '#{user._id}')
