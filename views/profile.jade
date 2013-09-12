@@ -5,4 +5,61 @@ head
 body 
 	include navbar
 	.container
+		.row
+			.col-xs-9
+				.row 
+					.col-xs-3
+						img(src = 'https://graph.facebook.com/#{public_user.fbid}/picture?type=large', style = 'width:160px')
+					.col-xs-9
+						h1 #{public_user.fname} #{public_user.lname}
+						h4 Companies Started:&nbsp&nbsp
+							- each company in public_user.companies_started
+								a(href = '/company/#{company.id}') #{company.name}
+								| &nbsp&nbsp
+						h4.companies_partnered Companies Partnered With:&nbsp&nbsp
+						// keep investments private? h4.investment_companies Companies Investing In:&nbsp&nbsp
+				br
+				.row
+					.col-xs-6
+						if (public_user.extra_fb_info.hometown)
+							b HOMETOWN
+							p #{public_user.extra_fb_info.hometown.name}
+							hr
+						if (public_user.extra_fb_info.bio)
+							b BIO
+							p #{public_user.extra_fb_info.bio}
+							hr
+						if (public_user.extra_fb_info.work)
+							b WORK
+							ul
+								- each company in public_user.extra_fb_info.work
+									li #{company.employer.name}
+							hr
+						if (public_user.extra_fb_info.political)
+							b POLITICS
+							p #{public_user.extra_fb_info.political}
+							hr
+					.col-xs-6
+						if (public_user.extra_fb_info.location)
+							b CURRENT LOCATION
+							p #{public_user.extra_fb_info.location.name}
+							hr
+						if (public_user.extra_fb_info.quotes)
+							b QUOTES
+							p #{public_user.extra_fb_info.quotes}
+							hr
+						if (public_user.extra_fb_info.education)
+							b SCHOOL
+							ul
+								- each school in public_user.extra_fb_info.education
+									li #{school.school.name}
+							hr
+						if (public_user.extra_fb_info.languages)
+							b LANGUAGES
+							ul
+								- each language in public_user.extra_fb_info.languages
+									li #{language.name}
+							hr
+			.col-xs-3.notifications
 	include footer
+	script(src='/js/profile.js')

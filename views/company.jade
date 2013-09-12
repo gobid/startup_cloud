@@ -1,0 +1,218 @@
+!!! 5
+html(lang='en')
+head
+	include head
+body 
+	include navbar
+	.container
+		.row
+			if (public_company)
+					input(style = 'display:none;', id = 'public_company_id', value = '#{public_company.id}')
+					input(style = 'display:none;', id = 'public_company_name', value = '#{public_company.name}')
+					input(style = 'display:none;', id = 'public_company_site', value = '#{public_company.website}')
+					input(style = 'display:none;', id = 'public_company_fb', value = '#{public_company.fb_page}')
+			.col-xs-9
+				.row 
+					.col-xs-3
+						img(src = '', style = 'width:160px')
+					.col-xs-9
+						h1 #{public_company.name}
+						if (public_company.slogan)
+							h4 #{public_company.slogan}
+				br
+				br
+				.row
+					.col-xs-6
+						if (public_company.description)
+							b DESCRIPTION
+							p #{public_company.description}
+							hr
+						if (public_company.fb_page)
+							b FACEBOOK
+							p facebook.com/#{public_company.fb_page}
+							hr
+						if (public_company.blog)
+							b BLOG
+							p #{public_company.blog}
+							hr
+						if (public_company.phone)
+							b PHONE
+							p #{public_company.phone}
+							hr
+						if (public_company.founded)
+							b FOUNDED
+							p #{public_company.founded}
+							hr
+						if (public_company.city)
+							b CITY
+							p #{public_company.city}
+							hr
+						if (public_company.country)
+							b COUNTRY
+							p #{public_company.country}
+							hr
+						if (public_company.video)
+							b VIDEO
+							p #{public_company.video}
+							// eventually embed youtube video
+							hr
+						if (public_company.products && public_company.products.length > 0)
+							b PRODUCTS
+							- each product in public_company.products
+								br
+								br
+								img(src = '')
+								b NAME
+								p #{product.name} 
+									if (product.subtitle)
+										| - #{product.subtitle}
+								if (product.description)
+									b DESCRIPTION
+									p #{product.description}
+								if (product.video) 
+									// eventually embed video
+									p #{product.video}
+							hr
+						if (public_company.investors && public_company.investors.length > 0)
+							b INVESTORS
+							- each investor in public_company.investors
+								br
+								br
+								img(src = '')
+								b NAME
+								p.member(id='#{investor.id}')
+							hr
+					.col-xs-6
+						if (public_company.website)
+							b WEBSITE
+							p #{public_company.website}
+							hr
+						if (public_company.twitter)
+							b TWITTER
+							p #{public_company.twitter}
+							hr
+						if (public_company.category)
+							b INDUSTRY
+							p #{public_company.category}
+							hr
+						if (public_company.email)
+							b EMAIL
+							p #{public_company.email}
+							hr
+						if (public_company.address)
+							b ADDRESS
+							p #{public_company.address}
+							hr
+						if (public_company.state)
+							b STATE
+							p #{public_company.state}
+							hr
+						if (public_company.zip)
+							b ZIP
+							p #{public_company.zip}
+							hr
+						if (public_company.team && public_company.team.length > 0)
+							b TEAM
+							- each member in public_company.team
+								br
+								br
+								img(src = '')
+								b NAME
+								p.member(id='#{member.id}')
+								b JOB
+								p #{member.job}
+							hr
+				.row
+					.col-xs-12
+						.panel.panel-default
+							// got to separate out the js files to fix the functionality of the below:
+							.panel-heading Facebook Statistics
+							table.table 
+								tr
+									td Talking About
+									td.fb_talking_about
+								tr
+									td Were Here Count
+									td.fb_were_here
+								tr
+									td Likes
+									td.fb_likes
+						.panel.panel-default
+							.panel-heading Other Social Statistics
+							table.table 
+								tr
+									td Alexa Global 
+									td.alexa_global
+								tr 
+									td Google Page Rank
+									td.google_page_rank
+								tr
+									td Facebook Shares
+									td.facebook_shares
+								tr
+									td Twitter Mentions
+									td.twitter_mentions
+								tr
+									td Linkedin Shares
+									td.linkedin_shares
+								tr
+									td Pinterest Shares
+									td.pinterest_shares
+						.panel.panel-default
+							.panel-heading SEMRush Related and Competing Companies
+							table.table(id = 'competition')
+						.panel.panel-default
+							.panel-heading #{public_company.name} Valuation Table
+							table.table 
+								tr
+									td 
+										strong Estimate
+									td 
+										strong Formula
+									td 
+										strong Value
+								tr
+									td Core
+									td [Assets] - [Liabilities]
+									td(id = 'core', width = '75px')
+										.center
+											img(src = '/img/ajax-loader.gif') 
+								tr
+									td Interweb
+									td [Core] + 68 x exp( 1.6 x [PageRank] ) 
+									td(id = 'interweb') 
+										.center
+											img(src = '/img/ajax-loader.gif') 
+								tr
+									td Social
+									td [Interweb] + [FB likes] + .05 x [Twitter mentions]
+									td(id = 'social') 
+										.center
+											img(src = '/img/ajax-loader.gif') 
+								tr
+									td Network
+									td [Social] + .01 x [FB shares] + .01 x [LinkedIn shares]
+									td(id = 'network') 
+										.center
+											img(src = '/img/ajax-loader.gif') 
+								tr
+									td Team
+									td [Network] + Sum over Team: Valuation( [Member] )
+									td(id = 'team') 
+										.center
+											img(src = '/img/ajax-loader.gif') 
+								tr
+									td Investor
+									td [Team] + Sum over Investors: Valuation( [Investor] )
+									td(id = 'investor') 
+										.center
+											img(src = '/img/ajax-loader.gif') 
+								tr 
+									td Final
+									td [Investor] x .01 x ( 100 - min(50, [# of Competitors] )
+									td(id = 'final') 
+										.center
+											img(src = '/img/ajax-loader.gif') 
+			.col-xs-3.notifications
+	include footer
+	script(src='/js/company.js')

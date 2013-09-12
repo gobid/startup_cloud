@@ -9,5 +9,130 @@ body
 			.col-xs-2
 				include side-navbar
 			.col-xs-7
-			.col-xs-3
+				.col-xs-6
+					h1 Assets
+					h4 Current Assets
+					if (company && company.cash != '')
+						.input-group
+							span.input-group-addon $
+							input.form-control(placeholder = 'Cash', value = '#{company.cash}', id = 'cash')
+					else
+						.input-group
+							span.input-group-addon $
+							input.form-control(placeholder = 'Cash', id = 'cash')
+					if (company && company.accounts_rec != '')
+						.input-group
+							span.input-group-addon $
+							input.form-control(placeholder = 'Accounts Receivable', value = '#{company.accounts_rec}', id = 'accounts_rec')
+					else
+						.input-group
+							span.input-group-addon $
+							input.form-control(placeholder = 'Accounts Receivable', id = 'accounts_rec')
+					if (company && company.inventories != '')
+						.input-group
+							span.input-group-addon $
+							input.form-control(placeholder = 'Inventories', value = '#{company.inventories}', id = 'inventories')
+					else
+						.input-group
+							span.input-group-addon $
+							input.form-control(placeholder = 'Inventories', id = 'inventories')
+					if (company && company.prepaid_expenses)
+						.input-group
+							span.input-group-addon $
+							input.form-control(placeholder = 'Prepaid Expenses', value = '#{company.prepaid_expenses}', id = 'prepaid_expenses')
+					else
+						.input-group
+							span.input-group-addon $
+							input.form-control(placeholder = 'Prepaid Expenses', id = 'prepaid_expenses')
+					h4 Non-current Assets
+					if (company && company.prop_plant_equip != '')
+						.input-group
+							span.input-group-addon $
+							input.form-control(placeholder = 'Property/Plant & Equipment', value = '#{company.prop_plant_equip}', id = 'prop_plant_equip')
+					else
+						.input-group
+							span.input-group-addon $
+							input.form-control(placeholder = 'Property/Plant & Equipment', id = 'prop_plant_equip')
+					if (company && company.intangible)
+						.input-group
+							span.input-group-addon $
+							input.form-control(placeholder = 'Intangible Assets', value = '#{company.intangible}', id = 'intangible')
+					else
+						.input-group
+							span.input-group-addon $
+							input.form-control(placeholder = 'Intangible Assets', id = 'intangible')
+					if (company && company.financial_assets)
+						.input-group
+							span.input-group-addon $
+							input.form-control(placeholder = 'Financial Assets', value = '#{company.financial_assets}', id = 'financial_assets')
+					else
+						.input-group
+							span.input-group-addon $
+							input.form-control(placeholder = 'Financial Assets', id = 'financial_assets')
+					if (company && company.equity_method)
+						.input-group
+							span.input-group-addon $
+							input.form-control(placeholder = 'Equity Method Investments', value = '#{company.equity_method}', id = 'equity_method')
+					else
+						.input-group
+							span.input-group-addon $
+							input.form-control(placeholder = 'Equity Method Investments', id = 'equity_method')
+					if (company && company.biological)
+						.input-group
+							span.input-group-addon $
+							input.form-control(placeholder = 'Biological Assets', value = '#{company.biological}', id = 'biological')
+					else
+						.input-group
+							span.input-group-addon $
+							input.form-control(placeholder = 'Biological Assets', id = 'biological')
+					h4 Total Assets: $
+						span(id = 'assets') 
+				.col-xs-6
+					h1 Liabilities
+					if (company && company.accounts_payable)
+						.input-group
+							span.input-group-addon $
+							input.form-control(placeholder = 'Accounts Payable', value = '#{company.accounts_payable}', id = 'accounts_payable')
+					else
+						.input-group
+							span.input-group-addon $
+							input.form-control(placeholder = 'Accounts Payable', id = 'accounts_payable')
+					if (company && company.provisions)
+						.input-group
+							span.input-group-addon $
+							input.form-control(placeholder = 'Provisions', value = '#{company.provisions}', id = 'provisions')
+					else
+						.input-group
+							span.input-group-addon $
+							input.form-control(placeholder = 'Provisions', id = 'provisions')
+					if (company && company.financial_liab)
+						.input-group
+							span.input-group-addon $
+							input.form-control(placeholder = 'Financial Liabilities', value = '#{company.financial_liab}', id = 'financial_liab')
+					else
+						.input-group
+							span.input-group-addon $
+							input.form-control(placeholder = 'Financial Liabilities', id = 'financial_liab')
+					if (company && company.deferred_tax_liab_assets)
+						.input-group
+							span.input-group-addon $
+							input.form-control(placeholder = 'Deferred Tax Liab. & Assets', value = '#{company.deferred_tax_liab_assets}', id = 'deferred_tax_liab_assets')
+					else
+						.input-group
+							span.input-group-addon $
+							input.form-control(placeholder = 'Deferred Tax Liab. & Assets', id = 'deferred_tax_liab_assets')
+					if (company && company.unearned_rev)
+						.input-group
+							span.input-group-addon $
+							input.form-control(placeholder = 'Unearned Revenue', value = '#{company.unearned_rev}', id = 'unearned_rev')
+					else
+						.input-group
+							span.input-group-addon $
+							input.form-control(placeholder = 'Unearned Revenue', id = 'unearned_rev')
+					h4 Total Liabilities: $
+						span(id = 'liab') 
+					br 
+					p Note, we will display equity details under the valuation section.
+			.col-xs-3.notifications
 	include ../footer
+	script(src='/js/entrepreneur/finances.js')

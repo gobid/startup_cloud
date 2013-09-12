@@ -31,4 +31,34 @@ body
 												span.input-group-addon %
 							br 
 				button.btn.btn-default.btn-lg.btn-block(type='button', id = 'create_new_investment', index = '#{x}') New Company
+			.col-xs-3.notifications
+		.overlay
+			.overlay-message
+				.container
+					br
+					form
+						p Please upload a PDF of a legal statement confirming 
+							b.person person
+							|  has invested $
+							b.contribution contribution
+							|  for  
+							b.equity x
+							| % equity in 
+							b.company company
+							| . Once 
+							b.company company
+							| 's owner confirms this legal statement is valid, 
+							b.person person
+							|  will be added to 
+							b.company company
+							| 's investors and 
+							b.company company
+							|  will be added to 
+							b.person person
+							| 's investments.
+						input.form-control(type='file', id='file')
+						br
+						.btn.btn-default(id = 'submit') Submit
+						.btn.btn-default(id = 'cancel') Cancel
 	include ../footer
+	script(src='/js/investor/my_equity.js')

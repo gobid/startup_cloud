@@ -9,5 +9,58 @@ body
 			.col-xs-2
 				include side-navbar
 			.col-xs-7
-			.col-xs-3
+				.panel.panel-default
+					.panel-heading #{company.name} Valuation Table
+					table.table 
+						tr
+							td 
+								strong Estimate
+							td 
+								strong Formula
+							td 
+								strong Value
+						tr
+							td Core
+							td [Assets] - [Liabilities]
+							td(id = 'core', style = 'width:75px; // applies to all td fields') 
+								.center
+									img(src = '/img/ajax-loader.gif') 
+						tr
+							td Interweb
+							td [Core] + 68 x exp( 1.6 x [PageRank] ) 
+							td(id = 'interweb') 
+								.center
+									img(src = '/img/ajax-loader.gif') 
+						tr
+							td Social
+							td [Interweb] + [FB likes] + .05 x [Twitter mentions]
+							td(id = 'social') 
+								.center
+									img(src = '/img/ajax-loader.gif') 
+						tr
+							td Network
+							td [Social] + .01 x [FB shares] + .01 x [LinkedIn shares]
+							td(id = 'network') 
+								.center
+									img(src = '/img/ajax-loader.gif') 
+						tr
+							td Team
+							td [Network] + Sum over Team: Valuation( [Member] )
+							td(id = 'team') 
+								.center
+									img(src = '/img/ajax-loader.gif') 
+						tr
+							td Investor
+							td [Team] + Sum over Investors: Valuation( [Investor] )
+							td(id = 'investor') 
+								.center
+									img(src = '/img/ajax-loader.gif') 
+						tr 
+							td Final
+							td [Investor] x .01 x ( 100 - min(50, [# of Competitors] )
+							td(id = 'final') 
+								.center
+									img(src = '/img/ajax-loader.gif') 
+			.col-xs-3.notifications
 	include ../footer
+	script(src='/js/entrepreneur/equity_valuation.js')

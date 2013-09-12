@@ -9,5 +9,9 @@ body
 			.col-xs-2
 				include side-navbar
 			.col-xs-7
-			.col-xs-3
+				.panel.panel-default
+					.panel-heading SEMRush Related and Competing Companies
+					table.table(id = 'competition')
+			.col-xs-3.notifications
 	include ../footer
+	script(src='/js/entrepreneur/related_companies.js')

@@ -25,11 +25,18 @@
 					a(href='/equity_partner/my_companies') Equity Partner's Desk
 				li
 					a(href='/profile') Profile
-				li
-					a(href='#') Notifications
+				li 
+					form.navbar-form.navbar-right(role = 'search')
+						.form-group
+							input.form-control.search-typeahead(placeholder = 'Search', style = 'width: 150px')
 				li 
 					a(href='#') Logout
 if (company)
 	input(style = 'display:none;', id = 'company_id', value = '#{company.id}')
+	input(style = 'display:none;', id = 'company_name', value = '#{company.name}')
+	input(style = 'display:none;', id = 'company_site', value = '#{company.website}')
+	input(style = 'display:none;', id = 'company_fb', value = '#{company.fb_page}')
 if (user)
 	input(style = 'display:none;', id = 'member_id', value = '#{user._id}')
+	input(style = 'display:none;', id = 'member_name', value = '#{user.fname} #{user.lname}')
+script(src='/js/navbar.js')

@@ -1,0 +1,68 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
+    ],
+    "hash": "76372b9c318fd9981df66f78b723f386",
+    "packages": [
+        {
+            "name": "seostats/seostats",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/eyecatchup/SEOstats.git",
+                "reference": "7b539a964f858fd579a9f31fada79f12118404f0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/eyecatchup/SEOstats/zipball/7b539a964f858fd579a9f31fada79f12118404f0",
+                "reference": "7b539a964f858fd579a9f31fada79f12118404f0",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.2.3"
+            },
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Stephan Schmitz",
+                    "email": "eyecatchup@gmail.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "SEOstats is a powerful open source PHP library to request a bunch of SEO relevant metrics for any website.",
+            "homepage": "http://github.com/eyecatchup/SEOstats",
+            "keywords": [
+                "Alexa",
+                "Backlinks",
+                "Pagerank",
+                "SEMRush",
+                "bing",
+                "google",
+                "seo",
+                "seomoz"
+            ],
+            "time": "2013-08-17 04:39:33"
+        }
+    ],
+    "packages-dev": [
+
+    ],
+    "aliases": [
+
+    ],
+    "minimum-stability": "stable",
+    "stability-flags": {
+        "seostats/seostats": 20
+    },
+    "platform": [
+
+    ],
+    "platform-dev": [
+
+    ]
+}
