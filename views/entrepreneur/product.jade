@@ -15,19 +15,24 @@ body
 						- for (x = 0; x < company.products.length; x++)
 							.row
 								.col-xs-3
-									img.img-rounded(src='data:image/png;base64,', data-src='holder.js/125x100', alt='Generic placeholder image', field = 'product_image', number = '#{x}')
+									.form-group(field = 'product_image_gp', number = '#{x}')
+										img.img-rounded(src='data:image/png;base64,', data-src='holder.js/125x100', alt='Generic placeholder image', field = 'product_image', number = '#{x}', data-placement='left', data-container = 'body', data-content='For a product image, simply fill out your facebook page information below and we will load your facebook page profile picture.', data-trigger = 'manual')
 								.col-xs-9
-									input.form-control.input-lg(value='#{company.products[x].name}', field = 'product_name', number = '#{x}')
-									br
-									input.form-control(value = '#{company.products[x].subtitle}', field = 'product_subtitle', number = '#{x}')
+									.form-group(field = 'product_name_gp', number = '#{x}')
+										input.form-control.input-lg(placeholder = 'Product name', value='#{company.products[x].name}', field = 'product_name', number = '#{x}')
+									.input-group(field = 'product_subtitle_gp', number = '#{x}')	
+										span.input-group-addon https://facebook.com/
+										input.form-control(value = '#{company.products[x].subtitle}', field = 'product_subtitle', number = '#{x}', placeholder = 'product facebook page')
+										// subtitle is the facebook page vanity url
 							br
 							.row
 								.col-xs-12
-									textarea.form-control(rows = '3', value = '#{company.products[x].description}', field = 'product_description', number = '#{x}')
-									br
-									.input-group
+									.form-group(field = 'product_description_gp', number = '#{x}')
+										textarea.form-control(rows = '3', field = 'product_description', number = '#{x}', placeholder = 'Description') #{company.products[x].description}
+									.input-group(field = 'product_video_gp', number = '#{x}')
 										span.input-group-addon http://youtube.com/
-										input.form-control(type='text', value = '#{company.products[x].video}', field = 'product_video', number = '#{x}')
+										input.form-control(type='text', value = '#{company.products[x].video}', field = 'product_video', number = '#{x}', placeholder = 'product video')
+							br
 							br
 				button.btn.btn-default.btn-lg.btn-block(type='button', id = 'create_new_product', index = '#{x}') New Product
 			.col-xs-3.notifications

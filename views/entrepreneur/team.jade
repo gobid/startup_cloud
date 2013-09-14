@@ -15,18 +15,23 @@ body
 						- for (x = 0; x < company.team.length; x++)
 							.row
 								.col-xs-3
-									img.img-rounded(src='data:image/png;base64,', data-src='holder.js/125x100', alt='Generic placeholder image', number = '#{x}')
+									.form-group(field='member_image_gp', number='#{x}')
+										img.img-rounded(src='data:image/png;base64,', data-src='holder.js/125x125', alt='Generic placeholder image', number = '#{x}')
 								.col-xs-9
-									input.form-control.user-typeahead(value = '', field = 'member_name', number = '#{x}', disabled = 'disabled', member_id = '#{company.team[x].id}')
-									br
-									br
+									.form-group(field = 'member_name_gp', number = '#{x}', pending = '#{company.team[x].pending}')
+										input.form-control.user-typeahead(value = '', field = 'member_name', number = '#{x}', disabled = 'disabled', member_id = '#{company.team[x].id}')
 									.row
 										.col-xs-6
-											input.form-control(type='text', value = '#{company.team[x].job}', field = 'member_job', number = '#{x}')
+											.form-group(field = 'member_job_gp', number = '#{x}')
+												input.form-control(type='text', value = '#{company.team[x].job}', field = 'member_job', number = '#{x}')
 										.col-xs-6
-											.input-group
+											.input-group(field = 'member_equity_gp', number = '#{x}')
 												input.form-control(type='text', value = '#{company.team[x].equity}', field = 'member_equity', number = '#{x}')
 												span.input-group-addon %
+									if (company.team[x].pending == 1)
+										b.text-warning APPROVAL PENDING
+									else 
+										b.text-success APPROVED
 							br 
 				button.btn.btn-default.btn-lg.btn-block(type='button', id = 'create_new_member', index = '#{x}') New Member
 			.col-xs-3.notifications
@@ -58,5 +63,9 @@ body
 						br
 						.btn.btn-default(id = 'submit') Submit
 						.btn.btn-default(id = 'cancel') Cancel
+						br
+						br
+						.alert.alert-block.alert-danger(style = "display:none;", id = 'check_notifications')
+							p Check your notifications. There is already a request to you from the other party. Respond to that first.
 	include ../footer
 	script(src='/js/entrepreneur/team.js')

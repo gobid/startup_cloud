@@ -14,7 +14,11 @@ body
 			.col-xs-9
 				.row 
 					.col-xs-3
-						img(src = '', style = 'width:160px')
+						if(public_company.fb_page != '')
+							br
+							img.img-rounded(src = 'https://graph.facebook.com/#{public_company.fb_page}/picture?type=large', style = 'width:150px;')
+						else
+							img.img-rounded(src='data:image/png;base64,', data-src='holder.js/150x150', alt='Generic placeholder image')
 					.col-xs-9
 						h1 #{public_company.name}
 						if (public_company.slogan)
@@ -58,29 +62,28 @@ body
 							hr
 						if (public_company.products && public_company.products.length > 0)
 							b PRODUCTS
+							br
+							br
 							- each product in public_company.products
+								if (product.name)
+									.row
+										.col-xs-6
+											if(product.subtitle != '')
+												img(src = 'https://graph.facebook.com/#{product.subtitle}/picture?type=large', style = 'width:150px;')
+											else
+												img.img-rounded(src='data:image/png;base64,', data-src='holder.js/150x150', alt='Generic placeholder image')
+										.col-xs-6
+											b NAME
+											p #{product.name} 
+											if (product.description)
+												b DESCRIPTION
+												p #{product.description}
+											if (product.video) 
+												// eventually embed video
+												b VIDEO
+												br
+												a(href = 'http://youtube.com/#{product.video}', target = '_blank') Video Link
 								br
-								br
-								img(src = '')
-								b NAME
-								p #{product.name} 
-									if (product.subtitle)
-										| - #{product.subtitle}
-								if (product.description)
-									b DESCRIPTION
-									p #{product.description}
-								if (product.video) 
-									// eventually embed video
-									p #{product.video}
-							hr
-						if (public_company.investors && public_company.investors.length > 0)
-							b INVESTORS
-							- each investor in public_company.investors
-								br
-								br
-								img(src = '')
-								b NAME
-								p.member(id='#{investor.id}')
 							hr
 					.col-xs-6
 						if (public_company.website)
@@ -113,14 +116,35 @@ body
 							hr
 						if (public_company.team && public_company.team.length > 0)
 							b TEAM
+							br
+							br
 							- each member in public_company.team
-								br
-								br
-								img(src = '')
-								b NAME
-								p.member(id='#{member.id}')
-								b JOB
-								p #{member.job}
+								.row
+									.col-xs-6
+										.form-group.placeholder(id = '#{member.id}')
+											img.img-rounded.placeholder(src='data:image/png;base64,', data-src='holder.js/150x150', alt='Generic placeholder image')
+									.col-xs-6
+										b NAME
+										br
+										a.member(id='#{member.id}', href = '/profile/#{member.id}')
+										br
+										br
+										b JOB
+										p #{member.job}
+							hr
+						if (public_company.investors && public_company.investors.length > 0)
+							b INVESTORS
+							br
+							br
+							- each investor in public_company.investors
+								.row
+									.col-xs-6
+										.form-group.placeholder(id = '#{investor.id}')
+											img.img-rounded(src='data:image/png;base64,', data-src='holder.js/150x150', alt='Generic placeholder image')
+									.col-xs-6
+										b NAME
+										br
+										a.member(id='#{investor.id}', href = '/profile/#{investor.id}')
 							hr
 				.row
 					.col-xs-12

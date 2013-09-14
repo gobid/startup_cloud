@@ -15,18 +15,23 @@ body
 						- for (x = 0; x < user.equity_partnerships.length; x++)
 							.row
 								.col-xs-3
-									img.img-rounded(src='data:image/png;base64,', data-src='holder.js/125x100', alt='Generic placeholder image', number = '#{x}')
+									.form-group(field = 'company_image_gp', number = '#{x}')
+										img.img-rounded(src='data:image/png;base64,', data-src='holder.js/125x100', alt='Generic placeholder image', number = '#{x}')
 								.col-xs-9
-									input.form-control.company-typeahead(value='', field = 'company_name', number = '#{x}', disabled = 'disabled', company_id = '#{user.equity_partnerships[x].id}')
-									br
-									br
+									.form-group(field = 'company_name_gp', number = '#{x}', pending = '#{user.equity_partnerships[x].pending}')
+										input.form-control.company-typeahead(value='', field = 'company_name', number = '#{x}', disabled = 'disabled', company_id = '#{user.equity_partnerships[x].id}')
 									.row
 										.col-xs-6
-											input.form-control(type='text', value = '#{user.equity_partnerships[x].job}', field = 'company_job', number = '#{x}')
+											.form-group(field = 'company_job_gp', number = '#{x}')
+												input.form-control(type='text', value = '#{user.equity_partnerships[x].job}', field = 'company_job', number = '#{x}')
 										.col-xs-6
-											.input-group
+											.input-group(field = 'company_equity_gp', number = '#{x}')
 												input.form-control(type='text', value = '#{user.equity_partnerships[x].equity}', field = 'company_equity', number = '#{x}')
 												span.input-group-addon %
+									if (user.equity_partnerships[x].pending == 1)
+										b.text-warning APPROVAL PENDING
+									else 
+										b.text-success APPROVED
 							br 
 				button.btn.btn-default.btn-lg.btn-block(type='button', id = 'create_new_company', index = '#{x}') New Company
 			.col-xs-3.notifications
@@ -58,5 +63,9 @@ body
 						br
 						.btn.btn-default(id = 'submit') Submit
 						.btn.btn-default(id = 'cancel') Cancel
+						br
+						br
+						.alert.alert-block.alert-danger(style = "display:none;", id = 'check_notifications')
+							p Check your notifications. There is already a request to you from the other party. Respond to that first.
 	include ../footer
 	script(src='/js/equity_partner/my_companies.js')

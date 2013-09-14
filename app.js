@@ -12,7 +12,6 @@
 	var nib = require('nib')
 	var check = require('validator').check,
 		sanitize = require('validator').sanitize
-	var exec = require('child_process').exec
 
 	// init servers to be used
 	var httpServer

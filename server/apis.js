@@ -1,4 +1,7 @@
 var docs = require('./documents'), User = docs.User, Company = docs.Company, Contract = docs.Contract
+var exec = require('child_process').exec
+var http = require('http')
+var https = require('https')
 
 module.exports = function(app) {
 
@@ -208,7 +211,7 @@ module.exports = function(app) {
 					})
 					break
 				case 'city':
-					Company.update({_id: req.params['company_id']}, {address: req.params['record_value'].trim()}, function(err) {
+					Company.update({_id: req.params['company_id']}, {city: req.params['record_value'].trim()}, function(err) {
 						if (err) return console.log("Problem finding company.")
 						else return console.log("Updated company with new value")
 					})
@@ -327,6 +330,7 @@ module.exports = function(app) {
 					member_seen = 1
 					team[index].job = job
 					team[index].equity = equity
+					team[index].pending = 1
 				}
 			}
 			if (!member_seen) team.push({id: member_id, job: job, equity: equity, pending: 1})
@@ -343,6 +347,7 @@ module.exports = function(app) {
 					partnership_seen = 1
 					equity_partnerships[index].job = job
 					equity_partnerships[index].equity = equity
+					equity_partnerships[index].pending = 1
 				}
 			}
 			if (!partnership_seen) equity_partnerships.push({id: company_id, job: job, equity: equity, pending: 1})
@@ -369,6 +374,7 @@ module.exports = function(app) {
 					investor_seen = 1
 					investors[index].contribution = contribution
 					investors[index].equity = equity
+					investors[index].pending = 1
 				}
 			}
 			if (!investor_seen) investors.push({id: investor_id, contribution: contribution, equity: equity, pending: 1})
@@ -385,6 +391,7 @@ module.exports = function(app) {
 					investment_seen = 1
 					investments[index].contribution = contribution
 					investments[index].equity = equity
+					investments[index].pending = 1
 				}
 			}
 			if (!investment_seen) investments.push({id: company_id, contribution: contribution, equity: equity, pending: 1})
@@ -398,14 +405,11 @@ module.exports = function(app) {
 	/* */
 
 	app.get('/get_user_by_id/:id', function(req, res){
-		if (req.session.user != null) {
-			var id = req.params['id']
-			User.findById(id, function(err, result){
-				if (result != null && result != undefined) res.json({name: result.fname + ' ' + result.lname})
-				else res.json({name: 'no-name-found'})
-			})
-		}
-		else res.send('not-logged-in')
+		var id = req.params['id']
+		User.findById(id, function(err, result){
+			if (result != null && result != undefined) res.json({name: result.fname + ' ' + result.lname})
+			else res.json({name: 'no-name-found'})
+		})
 	})
 
 	/* */
@@ -427,14 +431,11 @@ module.exports = function(app) {
 	/* */
 
 	app.get('/get_company_by_id/:id', function(req, res){
-		if (req.session.user != null) {
-			var id = req.params['id']
-			Company.findById(id, function(err, result){
-				if (result != null && result != undefined) res.json({name: result.name})
-				else res.json({name: 'no-name-found'})
-			})
-		}
-		else res.send('not-logged-in')
+		var id = req.params['id']
+		Company.findById(id, function(err, result){
+			if (result != null && result != undefined) res.json({name: result.name})
+			else res.json({name: 'no-name-found'})
+		})
 	})
 
 	/* */
@@ -627,7 +628,7 @@ module.exports = function(app) {
 		User.findById(req.params['user_id'], function(err, result){
 			if (err) console.log('Could not find user.')
 			var record_name = req.params['record_name']
-			switch(record_name){
+			switch(record_name){ // need to have security on some of these 
 				case 'companies_started': res.json({record: result.companies_started}); break;
 				case 'equity_partnerships': res.json({record: result.equity_partnerships}); break;
 				case 'extra_fb_info': res.json({record: result.extra_fb_info}); break;
@@ -666,30 +667,46 @@ module.exports = function(app) {
 			read: 0, // whether the notification is read
 			date: date.getTime(), // milliseconds since epoch
 		})
-		if (to == 0) // to a person from a company
-			Contract.find({to_id: to_id, company_id: company_id, type: type}, function(err, result){
+		if (to == 0) // from a company to a person 
+			Contract.find({to_id: to_id, company_id: company_id, type: type, to: 0}, function(err, result){ 
 				if (result.length == 0) {
-					notification.save(function(err) {
-						if (err) return console.log("Problem saving a new Contract.")
-						else res.json({response: "saved-contract"})
+					// check if a notification from the person to the company exists
+					Contract.find({from_id: to_id, company_id: company_id, type: type, to: 1}, function(err1, result1){ 
+						if (result1.length == 0){
+							notification.save(function(err) {
+								if (err) return console.log("Problem saving a new Contract.")
+								else res.json({response: "saved-contract"})
+							})
+						}
+						else {
+							res.json({response: "existing-contract-between-parties"})
+						}
 					})
 				}
-				else { // update the contract
+				else { // update the contract - the company already asked the person
 					var contract_id = result[0].id
 					Contract.update({_id: contract_id}, {equity: equity, job: job, contribution: contribution}, function(err){
 						res.json({response: "updated-contract"})
 					})
 				}
 			})
-		else // to a company from a person
-			Contract.find({from_id: req.params['from_id'], company_id: req.params['company_id'], type: req.params['type']}, function(err, result){
+		else // from a person to a company 
+			Contract.find({from_id: from_id, company_id: company_id, type: type, to: 1}, function(err, result){
 				if (result.length == 0) {
-					notification.save(function(err) {
-						if (err) return console.log("Problem saving a new Contract.")
-						else res.json({response: "saved-contract"})
+					// check if a notification from the company to the person exists
+					Contract.find({to_id: from_id, company_id: company_id, type: type, to: 0}, function(err1, result1){
+						if (result1.length == 0){
+							notification.save(function(err) {
+								if (err) return console.log("Problem saving a new Contract.")
+								else res.json({response: "saved-contract"})
+							})
+						}
+						else {
+							res.json({response: "existing-contract-between-parties"})
+						}
 					})
 				}
-				else { // update the contract
+				else { // update the contract - the person already asked the company
 					var contract_id = result[0].id
 					Contract.update({_id: contract_id}, {equity: equity, job: job, contribution: contribution}, function(err){
 						res.json({response: "updated-contract"})

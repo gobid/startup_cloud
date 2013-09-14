@@ -15,20 +15,25 @@ body
 						- for (x = 0; x < user.investments.length; x++)
 							.row
 								.col-xs-3
-									img.img-rounded(src='data:image/png;base64,', data-src='holder.js/125x100', alt='Generic placeholder image', number = '#{x}')
+									.form-group(field='investment_image_gp', number='#{x}')
+										img.img-rounded(src='data:image/png;base64,', data-src='holder.js/125x100', alt='Generic placeholder image', number = '#{x}')
 								.col-xs-9
-									input.form-control.investment-typeahead(value='', field = 'investment_name', number = '#{x}', disabled = 'disabled', investment_id = '#{user.investments[x].id}')
-									br
-									br
+									.form-group(field='investment_name_gp', number='#{x}', pending = '#{user.investments[x].pending}')
+										input.form-control.investment-typeahead(value='', field = 'investment_name', number = '#{x}', disabled = 'disabled', investment_id = '#{user.investments[x].id}')
 									.row
 										.col-xs-6
-											.input-group
+											.input-group(field='investment_contribution_gp', number='#{x}')
 												span.input-group-addon $
 												input.form-control(type='text', value = '#{user.investments[x].contribution}', field = 'investment_contribution', number = '#{x}')
 										.col-xs-6
-											.input-group
+											.input-group(field='investment_equity_gp', number='#{x}')
 												input.form-control(type='text', value = '#{user.investments[x].equity}', field = 'investment_equity', number = '#{x}')
 												span.input-group-addon %
+									br
+									if (user.investments[x].pending == 1)
+										b.text-warning APPROVAL PENDING
+									else 
+										b.text-success APPROVED
 							br 
 				button.btn.btn-default.btn-lg.btn-block(type='button', id = 'create_new_investment', index = '#{x}') New Company
 			.col-xs-3.notifications
@@ -60,5 +65,9 @@ body
 						br
 						.btn.btn-default(id = 'submit') Submit
 						.btn.btn-default(id = 'cancel') Cancel
+						br
+						br
+						.alert.alert-block.alert-danger(style = "display:none;", id = 'check_notifications')
+							p Check your notifications. There is already a request to you from the other party. Respond to that first.
 	include ../footer
 	script(src='/js/investor/my_equity.js')
