@@ -4,8 +4,8 @@
 	var fs = require('fs')
 	var http = require('http')
 	var https = require('https')
-	var privateKey  = fs.readFileSync('key.pem')
-	var certificate = fs.readFileSync('cert.pem')
+	var privateKey  = fs.readFileSync('startupcloud_org.key')
+	var certificate = fs.readFileSync('startupcloud_org.crt')
 	var credentials = {key: privateKey, cert: certificate}
 	var express = require('express')
 	var stylus = require('stylus')
@@ -19,14 +19,13 @@
 
 	// redirect all http traffic to https 
 	var app_http = express()
+	
 	app_http.get('*', function(req, res){
 		res.redirect('https://startupcloud.org'+req.url)
 	})
-	var httpServer = http.createServer(app_http)
 
-	// init db and app
+	// init app
 	var app = express()
-	var httpsServer = https.createServer(credentials, app)
 
 	// init session
 	app.use(express.cookieParser('secret'))
@@ -58,13 +57,15 @@
 	app.use(express.static(__dirname + '/public'))
 
 /* (3) REQUESTS */
-	
+
 	require("./server/pages")(app)
 	require("./server/apis")(app)
 
 /* (4) SERVER LISTENING */
 
 	// listen on port
+	var httpServer = http.createServer(app_http)
+	var httpsServer = https.createServer(credentials, app)
 	httpServer.listen(3000)
 	httpsServer.listen(8443)
 

@@ -177,10 +177,6 @@ module.exports = function(app) {
 		req.session.at = null
 		req.session.user = null
 		res.redirect('/')
-		/* note logout button when implemented must use: FB.logout(function(response) { // Person is now logged out })
-		   remember to warn the user that By facebook policy they will also be logged out of facebook */
 	})
-
-
 
 }

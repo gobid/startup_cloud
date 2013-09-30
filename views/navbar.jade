@@ -1,14 +1,33 @@
 .navbar.navbar-default.navbar-fixed-top
+	#fb-root
+	script.
+		// Additional JS functions here
+		window.fbAsyncInit = function() {
+			FB.init({
+				appId      : '472403996180656', // App ID
+				channelUrl : '//startupcloud.org/channel.html', // Channel File
+				status     : true, // check login status
+				cookie     : true, // enable cookies to allow the server to access the session
+				xfbml      : true  // parse XFBML
+			});
+		};
+		(function(d){
+			var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+			if (d.getElementById(id)) {return;}
+			js = d.createElement('script'); js.id = id; js.async = true;
+			js.src = "//connect.facebook.net/en_US/all.js";
+			ref.parentNode.insertBefore(js, ref);
+		}(document));
 	.container
 		.navbar-header
 			button.navbar-toggle(type='button', data-toggle='collapse', data-target='.navbar-collapse')
 				span.icon-bar
 				span.icon-bar
 				span.icon-bar
-			a.navbar-brand(href='#') Startup Cloud
+			a.navbar-brand(href='/') Startup Cloud
 		.navbar-collapse.collapse
 			ul.nav.navbar-nav
-				li.dropdown.active
+				li.dropdown.active(id = 'edesk', data-placement='bottom', data-container = 'body', data-content="Click here to select which of your companies to view, or to start a new company.", data-trigger = 'manual')
 					a.dropdown-toggle(href='#', data-toggle='dropdown')
 						| Entrepreneur's Desk
 						b.caret
@@ -30,12 +49,18 @@
 						.form-group
 							input.form-control.search-typeahead(placeholder = 'Search', style = 'width: 150px')
 				li 
-					a(href='#') Logout
+					if (user)
+						a(href='#', id = 'logout', data-placement='bottom', data-container = 'body', data-content="Note, it is facebook policy that we also log you out of facebook.", data-trigger = 'manual') Logout
+					else 
+						a(href='/') Login
 if (company)
 	input(style = 'display:none;', id = 'company_id', value = '#{company.id}')
 	input(style = 'display:none;', id = 'company_name', value = '#{company.name}')
-	input(style = 'display:none;', id = 'company_site', value = '#{company.website}')
 	input(style = 'display:none;', id = 'company_fb', value = '#{company.fb_page}')
+if (company && company.website)
+	input(style = 'display:none;', id = 'company_site', value = '#{company.website}')
+else 
+	input(style = 'display:none;', id = 'company_site', value = 'none')
 if (user)
 	input(style = 'display:none;', id = 'member_id', value = '#{user._id}')
 	input(style = 'display:none;', id = 'member_name', value = '#{user.fname} #{user.lname}')

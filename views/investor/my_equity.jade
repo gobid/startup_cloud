@@ -26,9 +26,13 @@ body
 												span.input-group-addon $
 												input.form-control(type='text', value = '#{user.investments[x].contribution}', field = 'investment_contribution', number = '#{x}')
 										.col-xs-6
-											.input-group(field='investment_equity_gp', number='#{x}')
-												input.form-control(type='text', value = '#{user.investments[x].equity}', field = 'investment_equity', number = '#{x}')
-												span.input-group-addon %
+											.row
+												.col-xs-7
+													.input-group(field='investment_equity_gp', number='#{x}')
+														input.form-control(type='text', value = '#{user.investments[x].equity}', field = 'investment_equity', number = '#{x}')
+														span.input-group-addon %
+												.col-xs-5
+													button.btn.btn-default.pull-right.go(number = '#{x}') Go!
 									br
 									if (user.investments[x].pending == 1)
 										b.text-warning APPROVAL PENDING
@@ -42,7 +46,7 @@ body
 				.container
 					br
 					form
-						p Please upload a PDF of a legal statement confirming 
+						p Please confirm 
 							b.person person
 							|  has invested $
 							b.contribution contribution
@@ -61,9 +65,8 @@ body
 							|  will be added to 
 							b.person person
 							| 's investments.
-						input.form-control(type='file', id='file')
 						br
-						.btn.btn-default(id = 'submit') Submit
+						.btn.btn-default(id = 'submit') Confirm
 						.btn.btn-default(id = 'cancel') Cancel
 						br
 						br

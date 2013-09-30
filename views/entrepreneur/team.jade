@@ -25,9 +25,13 @@ body
 											.form-group(field = 'member_job_gp', number = '#{x}')
 												input.form-control(type='text', value = '#{company.team[x].job}', field = 'member_job', number = '#{x}')
 										.col-xs-6
-											.input-group(field = 'member_equity_gp', number = '#{x}')
-												input.form-control(type='text', value = '#{company.team[x].equity}', field = 'member_equity', number = '#{x}')
-												span.input-group-addon %
+											.row
+												.col-xs-7
+													.input-group(field = 'member_equity_gp', number = '#{x}')
+														input.form-control(type='text', value = '#{company.team[x].equity}', field = 	'member_equity', number = '#{x}')
+														span.input-group-addon %	
+												.col-xs-5
+													button.btn.btn-default.pull-right.go(number = '#{x}') Go!
 									if (company.team[x].pending == 1)
 										b.text-warning APPROVAL PENDING
 									else 
@@ -40,7 +44,7 @@ body
 				.container
 					br
 					form
-						p Please upload a PDF of a legal statement confirming 
+						p Please confirm  
 							b.person person
 							|  works as 
 							b.job job
@@ -59,9 +63,8 @@ body
 							|  will be added to 
 							b.person person
 							| 's equity partnerships.
-						input.form-control(type='file', id='file')
 						br
-						.btn.btn-default(id = 'submit') Submit
+						.btn.btn-default(id = 'submit') Confirm
 						.btn.btn-default(id = 'cancel') Cancel
 						br
 						br

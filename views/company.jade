@@ -1,26 +1,33 @@
 !!! 5
 html(lang='en')
 head
+	title #{public_company.name}
 	include head
 body 
 	include navbar
 	.container
 		.row
 			if (public_company)
-					input(style = 'display:none;', id = 'public_company_id', value = '#{public_company.id}')
-					input(style = 'display:none;', id = 'public_company_name', value = '#{public_company.name}')
-					input(style = 'display:none;', id = 'public_company_site', value = '#{public_company.website}')
-					input(style = 'display:none;', id = 'public_company_fb', value = '#{public_company.fb_page}')
+				input(style = 'display:none;', id = 'public_company_id', value = '#{public_company.id}')
+				input(style = 'display:none;', id = 'public_company_name', value = '#{public_company.name}')
+				input(style = 'display:none;', id = 'public_company_fb', value = '#{public_company.fb_page}')
+			if (public_company && public_company.website != '')
+				input(style = 'display:none;', id = 'public_company_site', value = '#{public_company.website}')
+			else 
+				input(style = 'display:none;', id = 'public_company_site', value = 'none')				
 			.col-xs-9
 				.row 
 					.col-xs-3
 						if(public_company.fb_page != '')
 							br
-							img.img-rounded(src = 'https://graph.facebook.com/#{public_company.fb_page}/picture?type=large', style = 'width:150px;')
+							meta(property='og:image', content='https://graph.facebook.com/#{public_company.fb_page}/picture?type=large')
+							img.img-rounded(property='og:image', src = 'https://graph.facebook.com/#{public_company.fb_page}/picture?type=large', style = 'width:150px;')
 						else
 							img.img-rounded(src='data:image/png;base64,', data-src='holder.js/150x150', alt='Generic placeholder image')
 					.col-xs-9
-						h1 #{public_company.name}
+						h1 #{public_company.name}&nbsp&nbsp
+							if (public_company.fb_page)
+								a.btn.btn-default(target= '_blank',href='https://facebook.com/#{public_company.fb_page}') message on fb »
 						if (public_company.slogan)
 							h4 #{public_company.slogan}
 				br
@@ -238,5 +245,11 @@ body
 										.center
 											img(src = '/img/ajax-loader.gif') 
 			.col-xs-3.notifications
+		.row
+			.col-xs-12
+				.center
+					&nbsp
+					.fb-like(data-href='https://startupcloud.org/company/#{public_company.id}', data-width='450', data-show-faces='false', data-send='true')
+					.fb-comments(data-href='https://startupcloud.org/company/#{public_company.id}', data-width='700')
 	include footer
 	script(src='/js/company.js')

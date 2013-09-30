@@ -12,14 +12,17 @@ body
 					.col-xs-3
 						img(src = 'https://graph.facebook.com/#{public_user.fbid}/picture?type=large', style = 'width:160px')
 					.col-xs-9
-						h1 #{public_user.fname} #{public_user.lname}
+						h1 #{public_user.fname} #{public_user.lname}&nbsp&nbsp
+							a.btn.btn-default(target= '_blank',href='https://facebook.com/#{public_user.fbid}') message on fb »
+						hr
 						h4 Companies Started:&nbsp&nbsp
 							- each company in public_user.companies_started
 								a(href = '/company/#{company.id}') #{company.name}
 								| &nbsp&nbsp
+						hr
 						h4.companies_partnered Companies Partnered With:&nbsp&nbsp
 						// keep investments private? h4.investment_companies Companies Investing In:&nbsp&nbsp
-				br
+				hr
 				.row
 					.col-xs-6
 						if (public_user.extra_fb_info.hometown)

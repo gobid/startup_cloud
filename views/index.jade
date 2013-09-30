@@ -1,12 +1,13 @@
 !!! 5
 html(lang='en')
 head
+	link(rel = 'icon', type = 'image/png', href= '/img/hand.png')
+	link(rel = 'shortcut icon', type = 'image/png', href= '/img/hand.png')
 	meta(charset='utf-8')
 	meta(name='viewport', content='width=device-width, initial-scale=1.0')
 	meta(name='description', content='')
 	meta(name='author', content='')
-	link(rel='shortcut icon', href='bootstrap/assets/ico/favicon.png')
-	title Carousel Template for Bootstrap
+	title Startup Cloud
 	// Bootstrap core CSS 
 	link(href='bootstrap/dist/css/bootstrap.css', rel='stylesheet')
 	// HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries 
@@ -18,6 +19,7 @@ head
 	// load google jquery and our javascript
 	script(src='//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js')
 body
+	.fb-like(data-href='https://www.facebook.com/StartupCloud', data-width='450', data-layout='button_count', data-show-faces='false', data-send='false', style = 'position:fixed; right: 5px; top: 5px; z-index:1000')
 	#fb-root
 	script
 		// Additional JS functions here
@@ -69,41 +71,6 @@ body
 			js.src = "//connect.facebook.net/en_US/all.js";
 			ref.parentNode.insertBefore(js, ref);
 		}(document));
-	.navbar-wrapper
-		.container
-			.navbar.navbar-inverse.navbar-static-top
-				.container
-					.navbar-header
-						button.navbar-toggle(type='button', data-toggle='collapse', data-target='.navbar-collapse')
-							span.icon-bar
-							span.icon-bar
-							span.icon-bar
-						a.navbar-brand(href='#') Startup Cloud
-					.navbar-collapse.collapse
-						ul.nav.navbar-nav
-							li.active
-								a(href='#') Home
-							li
-								a(href='#about') About
-							li
-								a(href='#contact') Contact
-							li.dropdown
-								a.dropdown-toggle(href='#', data-toggle='dropdown')
-									| Dropdown
-									b.caret
-								ul.dropdown-menu
-									li
-										a(href='#') Action
-									li
-										a(href='#') Another action
-									li
-										a(href='#') Something else here
-									li.divider
-									li.dropdown-header Nav header
-									li
-										a(href='#') Separated link
-									li
-										a(href='#') One more separated link
 	#myCarousel.carousel.slide
 		ol.carousel-indicators
 			li.active(data-target='#myCarousel', data-slide-to='0')
@@ -111,30 +78,27 @@ body
 			li(data-target='#myCarousel', data-slide-to='2')
 		.carousel-inner
 			.item.active
-				img(src='data:image/png;base64,', data-src='holder.js/100%x500/auto/#777:#7a7a7a/text:First slide', alt='First slide')
+				img(src='/img/nyc.jpg', alt='First slide')
 				.container
 					.carousel-caption
-						h1 Example headline.
-						p
-							| Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
+						h1(style = 'font-size: 100px; font-weight:200;') Startup Cloud
+						h2(style = 'font-weight:100;') Start, invest in, and join startups.
 						p
 							fb:login-button(show-faces='false', width='200', max-rows='1')
 			.item
-				img(src='data:image/png;base64,', data-src='holder.js/100%x500/auto/#777:#7a7a7a/text:Second slide', alt='Second slide')
+				img(src='/img/taj.jpg', alt='Second slide')
 				.container
 					.carousel-caption
-						h1 Another example headline.
-						p
-							| Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
+						h1(style = 'font-size: 100px; font-weight:200; ') Startup Cloud
+						h2(style = 'font-weight:100;') Fight poverty with innovation. 
 						p
 							fb:login-button(show-faces='false', width='200', max-rows='1')
 			.item
-				img(src='data:image/png;base64,', data-src='holder.js/100%x500/auto/#777:#7a7a7a/text:Third slide', alt='Third slide')
+				img(src='/img/singapore.jpg', alt='Third slide')
 				.container
 					.carousel-caption
-						h1 One more for good measure.
-						p
-							| Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
+						h1(style = 'font-size: 100px; font-weight:200;') Startup Cloud
+						h2(style = 'font-weight:100;') Login with facebook to get started today.
 						p
 							fb:login-button(show-faces='false', width='200', max-rows='1')
 		a.left.carousel-control(href='#myCarousel', data-slide='prev')
@@ -148,66 +112,61 @@ body
 		// Three columns of text below the carousel 
 		.row
 			.col-lg-4
-				img.img-circle(src='data:image/png;base64,', data-src='holder.js/140x140', alt='Generic placeholder image')
-				h2 Heading
-				p
-					| Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna.
-				p
-					a.btn.btn-default(href='#') View details »
+				img.img-circle(src='/img/shanghai.jpg', style = 'width:140px; height:140px;', alt='Generic placeholder image')
+				h2 Poverty Eradication
+				p China has pulled approximately 600 million people out of absolute poverty since market reforms in the late 1970's. Never in human history have so many people been pulled out of grinding poverty is such a short span of time. (CNN)
 			.col-lg-4
-				img.img-circle(src='data:image/png;base64,', data-src='holder.js/140x140', alt='Generic placeholder image')
-				h2 Heading
-				p
-					| Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh.
-				p
-					a.btn.btn-default(href='#') View details »
+				img.img-circle(src='/img/dharavi.jpg', style = 'width:140px; height:140px;', alt='Generic placeholder image')
+				h2 Economic Freedom
+				p India has managed to pull 2 hundred million people out of grinding poverty since economic reforms were initiated. South Korea has gone from a per-capita income of $291 in 1970 to $20,000 today. (CNN)
 			.col-lg-4
-				img.img-circle(src='data:image/png;base64,', data-src='holder.js/140x140', alt='Generic placeholder image')
-				h2 Heading
-				p
-					| Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.
-				p
-					a.btn.btn-default(href='#') View details »
+				img.img-circle(src='/img/dubai.jpg', style = 'width:140px; height:140px;', alt='Generic placeholder image')
+				h2 Entrepreneurship
+				p Across the world, we find countries that created an entrepreneurship and business friendly environment were successful in reducing poverty drastically. (Professor Reuben Abraham for CNN Opinion)
+		hr.featurette-divider
+		.row.featurette
+			.col-md-7
+				h2.featurette-heading
+					| The only social agent that can create wealth is 
+					span.text-muted business
+					| .
+				p.lead
+					| Traditional analyses of economic development and growth have historically focused on large corporations, based on the assumption that these firms are the main drivers of economic growth in modern economies. Academics and policy makers are now increasingly appreciating and accounting for the role played by new and small businesses in the economy. (GEM 2012 Global Report, CNN)
 
+			.col-md-5
+				img.featurette-image.img-responsive(src='/img/seed.jpg', style = 'width:500px; height:500px;')
+		hr.featurette-divider
+		.row.featurette
+			.col-md-5
+				img.featurette-image.img-responsive(src='/img/female.jpg', style = 'width:500px; height:500px;')
+			.col-md-7
+				h2.featurette-heading
+					| Women can no longer be both 
+					span.text-muted half the population 
+					| and 
+					span.text-muted a special interest group
+					| .
+				p.lead
+					| Business is critical to Afghanistan’s future because long after the rounds of internationals leave, business would keep the country peaceful and secure. It is even more important for women because earning an income earns respect and 
+					b money is power for women
+					| . (Gayle Tzemach Lemmon’s TED Talk: Women entrepreneurs, example not exception)
 		hr.featurette-divider
 		.row.featurette
 			.col-md-7
 				h2.featurette-heading
-					| First featurette heading. 
-					span.text-muted It'll blow your mind.
+					| Experts largely rated entrepreneurship education at primary and secondary school levels as 
+					span.text-muted poor
+					| .
 				p.lead
-					| Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.
+					| There is a need for both national and global efforts to encourage this factor. There are clear linkages between education, poverty reduction and sustainability. The poor and marginalized are disproportionately more affected by poor environmental and socio-economic conditions. (GEM 2012 Global Report, UNESCO)
 			.col-md-5
-				img.featurette-image.img-responsive(src='data:image/png;base64,', data-src='holder.js/500x500/auto', alt='Generic placeholder image')
-		hr.featurette-divider
-		.row.featurette
-			.col-md-5
-				img.featurette-image.img-responsive(src='data:image/png;base64,', data-src='holder.js/500x500/auto', alt='Generic placeholder image')
-			.col-md-7
-				h2.featurette-heading
-					| Oh yeah, it's that good. 
-					span.text-muted See for yourself.
-				p.lead
-					| Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.
-		hr.featurette-divider
-		.row.featurette
-			.col-md-7
-				h2.featurette-heading
-					| And lastly, this one. 
-					span.text-muted Checkmate.
-				p.lead
-					| Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.
-			.col-md-5
-				img.featurette-image.img-responsive(src='data:image/png;base64,', data-src='holder.js/500x500/auto', alt='Generic placeholder image')
+				img.featurette-image.img-responsive(src='/img/abc.jpg', style = 'width:500px;')
 		hr.featurette-divider
 		footer
 			p.pull-right
 				a(href='#') Back to top
 			p
-				| © 2013 Company, Inc. · 
-				a(href='#') Privacy 
-				| · 
-				a(href='#') Terms 
+				| © 2013 Startup Cloud, Inc. 
 	// Bootstrap core JavaScript
 	// Placed at the end of the document so the pages load faster 
 	script(src='bootstrap/assets/js/jquery.js')
