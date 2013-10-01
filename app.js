@@ -1,5 +1,7 @@
 /* (1) APP SETUP */
 
+	var configurations = require("./configurations")
+
 	// init module usage
 	var fs = require('fs')
 	var http = require('http')
@@ -21,7 +23,7 @@
 	var app_http = express()
 	
 	app_http.get('*', function(req, res){
-		res.redirect('https://startupcloud.org'+req.url)
+		res.redirect(configurations.site_name+req.url) 
 	})
 
 	// init app
