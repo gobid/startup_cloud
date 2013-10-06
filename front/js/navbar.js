@@ -26,7 +26,7 @@ $(document).ready(function() {
 		$('input.search-typeahead')
 		.typeahead({
 			name: 'search-results',
-			remote: 'https://startupcloud.org/find_user_or_company/%QUERY.json', 
+			remote: '/find_user_or_company/%QUERY.json', 
 			template: "<span id = '{{id}}'>{{value}}</span>",
 			engine: Hogan
 		})

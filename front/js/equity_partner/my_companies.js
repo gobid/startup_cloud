@@ -94,7 +94,7 @@ $(document).ready(function() {
 		$('input.company-typeahead')
 		.typeahead({
 			name: 'companies',
-			remote: 'https://startupcloud.org/find_company/%QUERY.json', 
+			remote: '/find_company/%QUERY.json', 
 			template: "<span id = '{{id}}'>{{value}}</span>",
 			engine: Hogan
 		})

@@ -85,7 +85,7 @@ $(document).ready(function() {
 		$('input.user-typeahead')
 		.typeahead({
 			name: 'users',
-			remote: 'https://startupcloud.org/find_user/%QUERY.json', 
+			remote: '/find_user/%QUERY.json', 
 			template: "<span id = '{{id}}'>{{value}}</span>",
 			engine: Hogan
 		})

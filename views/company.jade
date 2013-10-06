@@ -249,7 +249,7 @@ body
 			.col-xs-12
 				.center
 					&nbsp
-					.fb-like(data-href='https://startupcloud.org/company/#{public_company.id}', data-width='450', data-show-faces='false', data-send='true')
-					.fb-comments(data-href='https://startupcloud.org/company/#{public_company.id}', data-width='700')
+					.fb-like(data-href='#{site_name}/company/#{public_company.id}', data-width='450', data-show-faces='false', data-send='true')
+					.fb-comments(data-href='#{site_name}/company/#{public_company.id}', data-width='700')
 	include footer
 	script(src='/js/company.js')

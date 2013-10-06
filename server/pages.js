@@ -168,7 +168,7 @@ module.exports = function(app) {
 		Company.findById(req.params['company_id'], function(err, public_company) {
 			if (err) console.log('Error while finding company.')
 			if (public_company != null && public_company != undefined)
-				res.render('company', {title: "Company Profile", user: req.session.user, public_company: public_company})
+				res.render('company', {title: "Company Profile", user: req.session.user, public_company: public_company, site_name: configurations.site_name})
 			else return console.log('Problem finding company.')
 		})
 	})

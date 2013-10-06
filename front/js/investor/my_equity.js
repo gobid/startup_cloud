@@ -93,7 +93,7 @@ $(document).ready(function() {
 		$('input.investment-typeahead')
 		.typeahead({
 			name: 'investments',
-			remote: 'https://startupcloud.org/find_company/%QUERY.json', 
+			remote: '/find_company/%QUERY.json', 
 			template: "<span id = '{{id}}'>{{value}}</span>",
 			engine: Hogan
 		})
