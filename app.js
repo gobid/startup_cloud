@@ -47,7 +47,7 @@
 	app.set('view engine', 'jade')
 	app.use(express.logger('dev'))
 	app.use(stylus.middleware({ 
-		src: __dirname + 'public',
+		src: __dirname + 'front',
 		compile: compile
 	}))
 	app.configure('development', function(){
@@ -56,7 +56,7 @@
 	})
 
 	// init static public directory
-	app.use(express.static(__dirname + '/public'))
+	app.use(express.static(__dirname + '/front'))
 
 /* (3) REQUESTS */
 
