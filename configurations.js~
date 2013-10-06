@@ -1,2 +1,3 @@
-exports.site_name = 'https://startupcloud.org'
-exports.db = 'mongodb://govinda:mongo8424@paulo.mongohq.com:10061/startup_cloud'
+exports.site_name = 'https://dev.startupcloud.org'
+exports.db = 'mongodb://govinda:mongo8424@paulo.mongohq.com:10001/startup_cloud_dev'
+exports.fbapp = '495158557246970'
