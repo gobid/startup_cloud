@@ -9,34 +9,34 @@
 			if (company)
 				a(href='/entrepreneur/product/#{company.id}') Product
 			else
-				a(href='#', data-content="First Create Company", data-trigger = 'manual', class = 'side-tab') Product
+				a.first_create_warning(href='#', data-content="First Create Company", data-trigger = 'manual', class = 'side-tab') Product
 		li
 			if (company)
 				a(href='/entrepreneur/team/#{company.id}') Team
 			else
-				a(href='#', data-content="First Create Company", data-trigger = 'manual', class = 'side-tab') Team
+				a.first_create_warning(href='#', data-content="First Create Company", data-trigger = 'manual', class = 'side-tab') Team
 		li
 			if (company)
 				a(href='/entrepreneur/investors/#{company.id}') Investors
 			else
-				a(href='#', data-content="First Create Company", data-trigger = 'manual', class = 'side-tab') Investors
+				a.first_create_warning(href='#', data-content="First Create Company", data-trigger = 'manual', class = 'side-tab') Investors
 		li
 			if (company)
 				a(href='/entrepreneur/finances/#{company.id}') Finances
 			else
-				a(href='#', data-content="First Create Company", data-trigger = 'manual', class = 'side-tab') Finances
+				a.first_create_warning(href='#', data-content="First Create Company", data-trigger = 'manual', class = 'side-tab') Finances
 		li
 			if (company)
 				a(href='/entrepreneur/social_outreach/#{company.id}') Outreach
 			else
-				a(href='#', data-content="First Create Company", data-trigger = 'manual', class = 'side-tab') Outreach
+				a.first_create_warning(href='#', data-content="First Create Company", data-trigger = 'manual', class = 'side-tab') Outreach
 		li
 			if (company)
 				a(href='/entrepreneur/related_companies/#{company.id}') Competition
 			else
-				a(href='#', data-content="First Create Company", data-trigger = 'manual', class = 'side-tab') Competition
+				a.first_create_warning(href='#', data-content="First Create Company", data-trigger = 'manual', class = 'side-tab') Competition
 		li
 			if (company)
 				a(href='/entrepreneur/equity_valuation/#{company.id}') Valuation
 			else
-				a(href='#', data-content="First Create Company", data-trigger = 'manual', class = 'side-tab') Valuation
+				a.first_create_warning(href='#', data-content="First Create Company", data-trigger = 'manual', class = 'side-tab') Valuation

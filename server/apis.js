@@ -27,7 +27,9 @@ module.exports = function(app) {
 					var fname = user.first_name
 					var lname = user.last_name
 					// implement simple login to app
+					console.log('user: ', user)
 					User.find({fbid: fbid}, function(err, result){
+						console.log('here')
 						if (err) console.log('Mongoose error when finding user.')
 						if (result.length == 0) { // new user case
 							var new_user = new User({

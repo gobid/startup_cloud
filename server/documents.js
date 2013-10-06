@@ -1,5 +1,7 @@
+var configurations = require("./../configurations")
+
 var mongoose = require('mongoose')
-	mongoose.connect('mongodb://govinda:mongo8424@paulo.mongohq.com:10061/startup_cloud')
+	mongoose.connect(configurations.db)
 
 
 // init mongoose models 

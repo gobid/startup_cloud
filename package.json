@@ -13,6 +13,7 @@
   "mongoose": "*",
   "validator": "*",
   "express-mailer": "*",
-  "hogan.js": "*"
+  "hogan.js": "*",
+  "forever": "*"
  }
 }
