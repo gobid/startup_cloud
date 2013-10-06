@@ -1,4 +1,4 @@
 startup_cloud
 =============
 
-changing the way people start companies
+start, invest in, and join startups
