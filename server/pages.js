@@ -1,3 +1,5 @@
+var configurations = require("./../configurations")
+
 var docs = require('./documents'), User = docs.User, Company = docs.Company, Contract = docs.Contract
 
 module.exports = function(app) {
@@ -8,7 +10,7 @@ module.exports = function(app) {
 		if (req.session.at == null) {
 			console.log('at null -> going to login')
 			console.log('req', req.session)
-			res.render('index', {title: 'Startup Cloud'})
+			res.render('index', {title: 'Startup Cloud', fbapp: configurations.fbapp})
 		}
 		else {
 			console.log('at not null')
