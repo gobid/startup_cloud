@@ -1,4 +1,4 @@
 startup_cloud
 =============
 
-start, invest in, and join startups
+a website and cross-platform mobile app bridging open courseware learning with paid work http://learningdollars.com/
